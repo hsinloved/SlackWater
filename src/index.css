@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Calm, meditation-like palette */
+  --color-bg: #f7f4ee; /* warm off-white */
+  --color-surface: #fffdf9; /* slightly lighter card surface */
+  --color-ink: #33485a; /* deep blue-grey text */
+  --color-ink-soft: #6b7a87; /* muted secondary text */
+  --color-accent: #7fae9e; /* muted sea-glass */
+  --color-accent-soft: #d9e8e2; /* pale sea-glass */
+  --color-sand: #e7dcc6; /* soft sand secondary */
+  --color-warn: #c08457; /* gentle terracotta, never alarming red */
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: ui-rounded, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+}
+
+/* Respect notches / safe areas on iOS */
+.safe-area {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
