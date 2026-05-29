@@ -40,6 +40,10 @@ export default {
           '0%': { opacity: '0', transform: 'scale(0.94)' },
           '100%': { opacity: '1', transform: 'scale(1)' },
         },
+        fade: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
       },
       animation: {
         'fade-in': 'fade-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both',
@@ -47,6 +51,7 @@ export default {
         'spin-slow': 'spin-slow 26s linear infinite',
         'spin-slower': 'spin-slow 38s linear infinite reverse',
         tick: 'tick 0.45s cubic-bezier(0.22, 1, 0.36, 1)',
+        fade: 'fade 0.6s ease-out both',
       },
     },
   },

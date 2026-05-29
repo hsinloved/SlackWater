@@ -54,6 +54,12 @@ export function BreathingCircle({
     // `screen` turns the video's black background transparent, so the orb melts
     // into the dark backdrop with no hard circular edge.
     mixBlendMode: 'screen',
+    // Feather the very edge to transparency as a belt-and-braces guard against
+    // any visible square, and to soften the rim.
+    maskImage:
+      'radial-gradient(circle, #000 64%, rgba(0,0,0,0) 82%)',
+    WebkitMaskImage:
+      'radial-gradient(circle, #000 64%, rgba(0,0,0,0) 82%)',
     filter: 'saturate(0.85) brightness(1.14) contrast(1.04) hue-rotate(-8deg)',
     transform: `scale(${scale})`,
     ...transition,
