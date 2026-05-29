@@ -19,19 +19,31 @@ function targetScale(phase: SessionPhase): number {
       return 1;
     case 'preparation-exhale':
     case 'empty-lung-stretch':
-      return 0.58;
+      return 0.6;
     case 'recovery':
     case 'rest':
-      return 0.78;
+      return 0.8;
     default:
-      return 0.78;
+      return 0.8;
   }
 }
 
-const SIZE = 280;
+const SIZE = 300;
+const ORB = 196;
+const SWIRL = 320;
+const SWIRL_OFFSET = (ORB - SWIRL) / 2;
 const STROKE = 3;
 const RADIUS = (SIZE - STROKE) / 2;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+
+const HOLO_CONIC =
+  'conic-gradient(from 0deg at 50% 50%, #8be0e6, #7cc0f7, #b9a7f0, #f4a9da, #f7efaa, #9ef0c4, #8be0e6)';
+
+const HOLO_BLOBS =
+  'radial-gradient(42% 42% at 28% 30%, #f4a9da 0%, transparent 70%),' +
+  'radial-gradient(46% 46% at 72% 34%, #7cc0f7 0%, transparent 70%),' +
+  'radial-gradient(46% 46% at 56% 78%, #9ef0c4 0%, transparent 70%),' +
+  'radial-gradient(40% 40% at 34% 70%, #b9a7f0 0%, transparent 70%)';
 
 export function BreathingCircle({
   phase,
@@ -42,12 +54,21 @@ export function BreathingCircle({
   const scale = targetScale(phase);
   const dashOffset = CIRCUMFERENCE * (1 - Math.min(1, Math.max(0, progress)));
 
-  // Shared transition so every layer breathes together over the step duration.
+  // Every breathing layer shares this so they expand and settle together.
   const breathe: CSSProperties = {
     transform: `scale(${scale})`,
     transitionProperty: 'transform',
     transitionDuration: `${durationSeconds}s`,
-    transitionTimingFunction: 'cubic-bezier(0.45, 0, 0.55, 1)',
+    transitionTimingFunction: 'cubic-bezier(0.37, 0, 0.63, 1)',
+  };
+
+  const swirlBase: CSSProperties = {
+    position: 'absolute',
+    width: SWIRL,
+    height: SWIRL,
+    left: SWIRL_OFFSET,
+    top: SWIRL_OFFSET,
+    borderRadius: '50%',
   };
 
   return (
@@ -55,46 +76,60 @@ export function BreathingCircle({
       className="relative flex items-center justify-center"
       style={{ width: SIZE, height: SIZE }}
     >
-      {/* Diffuse glow that softly pulses to keep the orb feeling alive */}
+      {/* Breathing group: glow + iridescent orb scale together */}
       <div
-        className="absolute rounded-full animate-glow"
-        style={{
-          ...breathe,
-          width: SIZE,
-          height: SIZE,
-          background:
-            'radial-gradient(circle, rgba(127,174,158,0.55) 0%, rgba(127,174,158,0) 70%)',
-          filter: 'blur(26px)',
-        }}
-      />
+        className="absolute flex items-center justify-center"
+        style={{ ...breathe, width: SIZE, height: SIZE }}
+      >
+        {/* Diffuse glow halo */}
+        <div
+          className="absolute rounded-full animate-glow"
+          style={{
+            width: SIZE,
+            height: SIZE,
+            background:
+              'radial-gradient(circle, rgba(140,220,225,0.55) 0%, rgba(180,170,240,0.28) 45%, rgba(180,170,240,0) 70%)',
+            filter: 'blur(28px)',
+          }}
+        />
 
-      {/* Wide translucent halo for depth */}
-      <div
-        className="absolute rounded-full"
-        style={{
-          ...breathe,
-          width: SIZE - 24,
-          height: SIZE - 24,
-          background:
-            'radial-gradient(circle at 50% 38%, rgba(217,232,226,0.85) 0%, rgba(217,232,226,0.25) 60%, rgba(217,232,226,0) 78%)',
-        }}
-      />
+        {/* The iridescent glass orb */}
+        <div
+          className="absolute overflow-hidden rounded-full"
+          style={{
+            width: ORB,
+            height: ORB,
+            boxShadow:
+              'inset 0 0 26px 6px rgba(255,255,255,0.55), inset 0 -12px 34px rgba(120,160,200,0.22), 0 26px 60px -18px rgba(120,150,170,0.55)',
+          }}
+        >
+          {/* Slowly swirling holographic gradient */}
+          <div
+            className="animate-spin-slow"
+            style={{ ...swirlBase, background: HOLO_CONIC, filter: 'blur(16px)' }}
+          />
+          <div
+            className="animate-spin-slower"
+            style={{
+              ...swirlBase,
+              background: HOLO_BLOBS,
+              filter: 'blur(20px)',
+              opacity: 0.85,
+              mixBlendMode: 'screen',
+            }}
+          />
+          {/* Bright light-leak center */}
+          <div
+            className="absolute inset-0 rounded-full"
+            style={{
+              background:
+                'radial-gradient(circle at 50% 46%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.4) 20%, rgba(255,255,255,0) 46%)',
+            }}
+          />
+        </div>
+      </div>
 
-      {/* The breathing orb */}
-      <div
-        className="absolute rounded-full"
-        style={{
-          ...breathe,
-          width: SIZE - 96,
-          height: SIZE - 96,
-          background:
-            'radial-gradient(circle at 50% 32%, #ffffff 0%, #eaf3ef 32%, #aacdbf 74%, #7fae9e 100%)',
-          boxShadow:
-            '0 20px 50px -14px rgba(106,150,134,0.6), inset 0 2px 14px rgba(255,255,255,0.75)',
-        }}
-      />
-
-      {/* Thin progress ring framing everything */}
+      {/* Thin progress ring framing everything (stays fixed while the orb breathes) */}
       <svg
         width={SIZE}
         height={SIZE}
@@ -106,7 +141,7 @@ export function BreathingCircle({
           cy={SIZE / 2}
           r={RADIUS}
           fill="none"
-          stroke="rgba(127,174,158,0.18)"
+          stroke="rgba(127,174,158,0.16)"
           strokeWidth={STROKE}
         />
         <circle
@@ -119,7 +154,7 @@ export function BreathingCircle({
           strokeLinecap="round"
           strokeDasharray={CIRCUMFERENCE}
           strokeDashoffset={dashOffset}
-          style={{ transition: 'stroke-dashoffset 0.2s linear' }}
+          style={{ transition: 'stroke-dashoffset 0.25s linear' }}
         />
       </svg>
 

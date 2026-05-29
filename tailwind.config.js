@@ -25,17 +25,28 @@ export default {
       },
       keyframes: {
         'fade-in': {
-          '0%': { opacity: '0', transform: 'translateY(6px)' },
+          '0%': { opacity: '0', transform: 'translateY(8px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         glow: {
-          '0%, 100%': { opacity: '0.4' },
-          '50%': { opacity: '0.7' },
+          '0%, 100%': { opacity: '0.45' },
+          '50%': { opacity: '0.8' },
+        },
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+        tick: {
+          '0%': { opacity: '0', transform: 'scale(0.94)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
         },
       },
       animation: {
-        'fade-in': 'fade-in 0.4s ease-out',
-        glow: 'glow 6s ease-in-out infinite',
+        'fade-in': 'fade-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both',
+        glow: 'glow 7s ease-in-out infinite',
+        'spin-slow': 'spin-slow 26s linear infinite',
+        'spin-slower': 'spin-slow 38s linear infinite reverse',
+        tick: 'tick 0.45s cubic-bezier(0.22, 1, 0.36, 1)',
       },
     },
   },
