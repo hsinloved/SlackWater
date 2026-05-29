@@ -10,47 +10,63 @@ export function Home() {
 
   return (
     <AppLayout>
-      <header className="mb-6 animate-fade-in">
-        <h1 className="text-3xl font-semibold tracking-tight text-ink">
-          Celeste
-        </h1>
-        <p className="mt-1 text-ink-soft">
-          Calm, dry-land breath awareness. Consistency over intensity.
+      <header className="mb-8 mt-2 animate-fade-in">
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">
+          Breathwork
         </p>
+        <h1 className="mt-1 text-4xl font-semibold tracking-tight text-ink">
+          Slack Water
+        </h1>
       </header>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3">
         {MODES.map((mode) => {
           const meta = MODE_META[mode];
           return (
             <button
               key={mode}
               onClick={() => navigate(`/setup/${mode}`)}
-              className="animate-fade-in rounded-3xl bg-surface px-5 py-5 text-left shadow-sm transition active:scale-[0.99] hover:brightness-[0.99]"
+              className="group flex animate-fade-in items-center justify-between gap-4 rounded-3xl bg-surface px-6 py-6 text-left shadow-sm transition active:scale-[0.99] hover:shadow-md"
             >
-              <h2 className="text-xl font-medium text-ink">{meta.title}</h2>
-              <p className="mt-0.5 text-sm font-medium text-accent">
-                {meta.subtitle}
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                {meta.description}
-              </p>
+              <span>
+                <span className="block text-xl font-medium text-ink">
+                  {meta.title}
+                </span>
+                <span className="mt-0.5 block text-sm text-ink-soft">
+                  {meta.subtitle}
+                </span>
+              </span>
+              <span
+                aria-hidden="true"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent transition group-hover:bg-accent group-hover:text-white"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M9 6l6 6-6 6"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
             </button>
           );
         })}
       </div>
 
-      <div className="mt-6 rounded-2xl bg-sand/50 px-5 py-4 text-sm leading-relaxed text-ink">
-        Dry-land practice only. Never practise breath-holding alone in water.
-        Do not hyperventilate. Stop if dizzy, uncomfortable, or unwell.
+      <div className="mt-auto flex flex-col items-center gap-4 pt-10">
+        <Link
+          to="/history"
+          className="text-base font-medium text-accent underline-offset-4 hover:underline"
+        >
+          Practice history
+        </Link>
+        <p className="text-center text-xs leading-relaxed text-ink-soft">
+          Dry-land only. Never practise breath-holding in water. Stop if you
+          feel unwell.
+        </p>
       </div>
-
-      <Link
-        to="/history"
-        className="mt-6 text-center text-base font-medium text-accent underline-offset-4 hover:underline"
-      >
-        View practice history
-      </Link>
     </AppLayout>
   );
 }

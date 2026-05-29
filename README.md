@@ -1,4 +1,4 @@
-# Celeste — Calm Breathwork
+# Slack Water — Calm Breathwork
 
 A minimal, mobile-first **PWA** for safe, dry-land breath-awareness practice
 aimed at beginner freedivers. The focus is relaxation, gentle breathing rhythm,

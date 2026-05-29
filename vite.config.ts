@@ -13,8 +13,8 @@ export default defineConfig(({ command }) => ({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Celeste — Calm Breathwork',
-        short_name: 'Celeste',
+        name: 'Slack Water — Calm Breathwork',
+        short_name: 'Slack Water',
         description:
           'Calm, dry-land breath-awareness practice for beginner freedivers.',
         theme_color: '#33485a',
