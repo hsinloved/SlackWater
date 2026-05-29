@@ -143,7 +143,7 @@ export function Setup() {
               onChange={(v) => update({ breathHoldSeconds: v })}
             />
             {config.breathHoldSeconds > LONG_HOLD_WARNING_SECONDS && (
-              <p className="rounded-2xl bg-sand/60 px-4 py-3 text-sm text-ink">
+              <p className="glass rounded-2xl px-4 py-3 text-sm text-ink">
                 {t('setup.longHoldWarning')}
               </p>
             )}
@@ -169,7 +169,7 @@ export function Setup() {
 
         {config.mode === 'rv-mobility' && (
           <>
-            <p className="rounded-2xl bg-sand/60 px-4 py-3 text-sm text-ink">
+            <p className="glass rounded-2xl px-4 py-3 text-sm text-ink">
               {t('setup.rvWarning')}
             </p>
             <NumberField

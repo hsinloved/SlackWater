@@ -11,7 +11,7 @@ export function HistoryList({ records }: HistoryListProps) {
 
   if (records.length === 0) {
     return (
-      <p className="rounded-2xl bg-surface px-5 py-8 text-center text-ink-soft">
+      <p className="glass rounded-2xl px-5 py-8 text-center text-ink-soft">
         {t('history.empty')}
       </p>
     );
@@ -20,7 +20,7 @@ export function HistoryList({ records }: HistoryListProps) {
   return (
     <ul className="flex flex-col gap-3">
       {records.map((r) => (
-        <li key={r.id} className="rounded-2xl bg-surface px-5 py-4 shadow-sm">
+        <li key={r.id} className="glass rounded-2xl px-5 py-4">
           <div className="flex items-baseline justify-between gap-3">
             <span className="font-medium text-ink">
               {t(`modes.${r.mode}.title`)}

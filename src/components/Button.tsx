@@ -9,12 +9,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const VARIANT_CLASSES: Record<Variant, string> = {
   primary:
-    'bg-accent text-white shadow-sm active:scale-[0.98] hover:brightness-105',
+    'bg-accent text-[#06212a] font-semibold shadow-[0_10px_26px_-8px_rgba(70,185,202,0.65)] active:scale-[0.98] hover:brightness-105',
   secondary:
-    'bg-accent-soft text-ink active:scale-[0.98] hover:brightness-[0.98]',
+    'bg-accent-soft text-ink active:scale-[0.98] hover:brightness-110',
   ghost: 'bg-transparent text-ink-soft hover:text-ink',
   warn: 'bg-deep text-white active:scale-[0.98] hover:brightness-110',
-  // For the dark active-session backdrop
+  // White button that pops on the dark backdrop (e.g. "I need to breathe")
   light: 'bg-white text-deep shadow active:scale-[0.98] hover:brightness-95',
   'ghost-light': 'bg-transparent text-white/75 hover:text-white',
 };

@@ -20,7 +20,7 @@ export function NumberField({
   const clamp = (v: number) => Math.min(max, Math.max(min, v));
 
   return (
-    <div className="flex items-center justify-between gap-3 rounded-2xl bg-surface px-4 py-3 shadow-sm">
+    <div className="glass flex items-center justify-between gap-3 rounded-2xl px-4 py-3">
       <span className="text-base text-ink">{label}</span>
       <div className="flex items-center gap-2">
         <button

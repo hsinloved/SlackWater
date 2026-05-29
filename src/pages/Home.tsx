@@ -31,7 +31,7 @@ export function Home() {
           <button
             key={mode}
             onClick={() => navigate(`/setup/${mode}`)}
-            className="group flex animate-fade-in items-center justify-between gap-4 rounded-3xl bg-surface px-6 py-6 text-left shadow-sm transition active:scale-[0.99] hover:shadow-md"
+            className="glass group flex animate-fade-in items-center justify-between gap-4 rounded-3xl px-6 py-6 text-left transition active:scale-[0.99] hover:bg-white/[0.09]"
           >
             <span>
               <span className="block text-xl font-medium text-ink">
@@ -43,7 +43,7 @@ export function Home() {
             </span>
             <span
               aria-hidden="true"
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent transition group-hover:bg-accent group-hover:text-white"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent transition group-hover:bg-accent group-hover:text-[#06212a]"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                 <path

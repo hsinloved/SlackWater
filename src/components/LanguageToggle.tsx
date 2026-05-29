@@ -7,7 +7,7 @@ export function LanguageToggle() {
 
   return (
     <div
-      className="inline-flex items-center rounded-full bg-surface p-1 shadow-sm"
+      className="glass inline-flex items-center rounded-full p-1"
       role="group"
       aria-label="Language"
     >
@@ -19,7 +19,9 @@ export function LanguageToggle() {
             onClick={() => setLang(l.code)}
             aria-pressed={active}
             className={`rounded-full px-3 py-1 text-sm font-medium transition ${
-              active ? 'bg-accent text-white' : 'text-ink-soft hover:text-ink'
+              active
+                ? 'bg-accent text-[#06212a]'
+                : 'text-ink-soft hover:text-ink'
             }`}
           >
             {l.label}

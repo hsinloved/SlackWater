@@ -79,8 +79,8 @@ export function Complete() {
                 onClick={() => setFeeling(f)}
                 className={`rounded-2xl px-4 py-3 text-sm transition ${
                   feeling === f
-                    ? 'bg-accent text-white'
-                    : 'bg-surface text-ink'
+                    ? 'bg-accent font-medium text-[#06212a]'
+                    : 'glass text-ink'
                 }`}
               >
                 {t(`feeling.${f}`)}
@@ -99,7 +99,9 @@ export function Complete() {
                 key={n}
                 onClick={() => setEffort(effort === n ? null : n)}
                 className={`h-11 flex-1 rounded-2xl text-sm transition ${
-                  effort === n ? 'bg-accent text-white' : 'bg-surface text-ink'
+                  effort === n
+                    ? 'bg-accent font-medium text-[#06212a]'
+                    : 'glass text-ink'
                 }`}
               >
                 {n}
@@ -126,7 +128,7 @@ export function Complete() {
             }
             value={holdInput}
             onChange={(e) => setHoldInput(e.target.value)}
-            className="w-full rounded-2xl bg-surface px-4 py-3 text-ink shadow-sm outline-none focus:ring-2 focus:ring-accent/40"
+            className="glass w-full rounded-2xl px-4 py-3 text-ink outline-none placeholder:text-ink-soft focus:ring-2 focus:ring-accent/40"
           />
         </div>
 
@@ -143,7 +145,7 @@ export function Complete() {
             placeholder={t('complete.notesPlaceholder')}
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            className="w-full resize-none rounded-2xl bg-surface px-4 py-3 text-ink shadow-sm outline-none focus:ring-2 focus:ring-accent/40"
+            className="glass w-full resize-none rounded-2xl px-4 py-3 text-ink outline-none placeholder:text-ink-soft focus:ring-2 focus:ring-accent/40"
           />
         </div>
       </section>

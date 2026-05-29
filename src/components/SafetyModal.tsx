@@ -11,12 +11,12 @@ export function SafetyModal({ onAcknowledge }: SafetyModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/30 p-5 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-5 backdrop-blur-md"
       role="dialog"
       aria-modal="true"
       aria-labelledby="safety-title"
     >
-      <div className="w-full max-w-md animate-fade-in rounded-3xl bg-surface p-7 shadow-xl">
+      <div className="glass-strong w-full max-w-md animate-fade-in rounded-3xl p-7">
         <div className="mb-4 flex items-start justify-between gap-4">
           <h1
             id="safety-title"
