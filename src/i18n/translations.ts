@@ -15,6 +15,7 @@ const en: Record<string, string> = {
   'common.home': 'Home',
 
   'home.eyebrow': 'Breathwork',
+  'home.tagline': 'Breath · Focus · Depth',
   'home.history': 'Practice history',
   'home.safety':
     'Dry-land only. Never practise breath-holding in water. Stop if you feel unwell.',
@@ -138,6 +139,7 @@ const zhTW: Record<string, string> = {
   'common.home': '首頁',
 
   'home.eyebrow': '呼吸練習',
+  'home.tagline': '呼吸 · 專注 · 深度',
   'home.history': '練習紀錄',
   'home.safety': '僅限陸上練習。切勿在水中閉氣。若感到不適請立即停止。',
 

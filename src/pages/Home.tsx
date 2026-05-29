@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { AppLayout } from '../components/AppLayout';
 import { LanguageToggle } from '../components/LanguageToggle';
+import { LogoMark } from '../components/LogoMark';
 import { useLanguage } from '../i18n/LanguageProvider';
 import type { SessionMode } from '../features/session/sessionTypes';
 
@@ -14,12 +15,13 @@ export function Home() {
     <AppLayout>
       <header className="mb-8 mt-2 flex animate-fade-in items-start justify-between gap-4">
         <div>
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">
-            {t('home.eyebrow')}
-          </p>
-          <h1 className="mt-1 text-4xl font-semibold tracking-tight text-ink">
-            Slack Water
+          <LogoMark className="h-11 w-auto text-accent" />
+          <h1 className="mt-3 text-2xl font-light tracking-[0.3em] text-ink">
+            SLACKWATER
           </h1>
+          <p className="mt-1 text-sm tracking-wide text-accent">
+            {t('home.tagline')}
+          </p>
         </div>
         <LanguageToggle />
       </header>

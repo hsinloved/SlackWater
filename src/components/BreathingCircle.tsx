@@ -36,15 +36,16 @@ const STROKE = 3;
 const RADIUS = (SIZE - STROKE) / 2;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
-// Calm ocean iridescence — soft, desaturated blues and teals (no neon/tropical).
+// Soft echo of the brand gradient (aqua → ocean teal → deep ocean), kept
+// gentle and desaturated — no neon/tropical tones.
 const HOLO_CONIC =
-  'conic-gradient(from 0deg at 50% 50%, #9ed2e6, #7ec8e3, #5fb2c4, #5f93b8, #8bb3d0, #b9d7e6, #9ed2e6)';
+  'conic-gradient(from 0deg at 50% 50%, #9fe0e0, #7ed2d6, #4fb0ba, #2f8e9e, #5bb6c2, #bfe6e8, #9fe0e0)';
 
 const HOLO_BLOBS =
-  'radial-gradient(42% 42% at 28% 30%, #7ec8e3 0%, transparent 70%),' +
-  'radial-gradient(46% 46% at 72% 34%, #5f93b8 0%, transparent 70%),' +
-  'radial-gradient(46% 46% at 56% 78%, #79c4cf 0%, transparent 70%),' +
-  'radial-gradient(40% 40% at 34% 70%, #9fb9d4 0%, transparent 70%)';
+  'radial-gradient(42% 42% at 28% 30%, #7ed2d6 0%, transparent 70%),' +
+  'radial-gradient(46% 46% at 72% 34%, #2f8e9e 0%, transparent 70%),' +
+  'radial-gradient(46% 46% at 56% 78%, #5bb6c2 0%, transparent 70%),' +
+  'radial-gradient(40% 40% at 34% 70%, #9cccd2 0%, transparent 70%)';
 
 export function BreathingCircle({
   phase,
@@ -89,7 +90,7 @@ export function BreathingCircle({
             width: SIZE,
             height: SIZE,
             background:
-              'radial-gradient(circle, rgba(126,200,227,0.5) 0%, rgba(95,147,184,0.24) 45%, rgba(95,147,184,0) 70%)',
+              'radial-gradient(circle, rgba(110,205,210,0.5) 0%, rgba(47,142,158,0.24) 45%, rgba(47,142,158,0) 70%)',
             filter: 'blur(28px)',
           }}
         />
@@ -101,7 +102,7 @@ export function BreathingCircle({
             width: ORB,
             height: ORB,
             boxShadow:
-              'inset 0 0 26px 6px rgba(255,255,255,0.55), inset 0 -12px 34px rgba(70,110,150,0.22), 0 26px 60px -18px rgba(60,100,140,0.5)',
+              'inset 0 0 26px 6px rgba(255,255,255,0.55), inset 0 -12px 34px rgba(20,100,115,0.22), 0 26px 60px -18px rgba(10,80,95,0.5)',
           }}
         >
           {/* Slowly swirling holographic gradient */}
@@ -142,7 +143,7 @@ export function BreathingCircle({
           cy={SIZE / 2}
           r={RADIUS}
           fill="none"
-          stroke="rgba(47,110,147,0.16)"
+          stroke="rgba(31,128,141,0.16)"
           strokeWidth={STROKE}
         />
         <circle

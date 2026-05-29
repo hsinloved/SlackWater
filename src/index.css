@@ -8,10 +8,10 @@
   --color-surface: #ffffff; /* crisp card surface */
   --color-ink: #0a1f3d; /* deep ocean navy text */
   --color-ink-soft: #587490; /* muted slate-blue secondary text */
-  --color-accent: #2f6e93; /* calm ocean blue */
-  --color-accent-soft: #c6deea; /* pale ocean blue */
+  --color-accent: #1f808d; /* calm ocean teal (brand) */
+  --color-accent-soft: #c9e6e8; /* pale teal */
   --color-sand: #d6e2ea; /* soft blue-grey for gentle surfaces */
-  --color-deep: #16425b; /* deep ocean — prominent / safety actions */
+  --color-deep: #005f73; /* deep ocean (brand) — prominent / safety actions */
 }
 
 html,
