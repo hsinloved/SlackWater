@@ -13,7 +13,7 @@ const VARIANT_CLASSES: Record<Variant, string> = {
   secondary:
     'bg-accent-soft text-ink active:scale-[0.98] hover:brightness-[0.98]',
   ghost: 'bg-transparent text-ink-soft hover:text-ink',
-  warn: 'bg-sand text-ink active:scale-[0.98] hover:brightness-[0.98]',
+  warn: 'bg-deep text-white active:scale-[0.98] hover:brightness-110',
 };
 
 export function Button({

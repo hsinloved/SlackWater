@@ -11,7 +11,7 @@ export default {
         accent: 'var(--color-accent)',
         'accent-soft': 'var(--color-accent-soft)',
         sand: 'var(--color-sand)',
-        warn: 'var(--color-warn)',
+        deep: 'var(--color-deep)',
       },
       fontFamily: {
         sans: [

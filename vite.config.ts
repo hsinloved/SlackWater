@@ -17,8 +17,8 @@ export default defineConfig(({ command }) => ({
         short_name: 'Slack Water',
         description:
           'Calm, dry-land breath-awareness practice for beginner freedivers.',
-        theme_color: '#33485a',
-        background_color: '#f7f4ee',
+        theme_color: '#0a1f3d',
+        background_color: '#e8f1f5',
         display: 'standalone',
         orientation: 'portrait',
         // Relative so it resolves correctly under the GitHub Pages subpath.

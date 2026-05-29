@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 :root {
-  /* Calm, meditation-like palette */
-  --color-bg: #f7f4ee; /* warm off-white */
-  --color-surface: #fffdf9; /* slightly lighter card surface */
-  --color-ink: #33485a; /* deep blue-grey text */
-  --color-ink-soft: #6b7a87; /* muted secondary text */
-  --color-accent: #7fae9e; /* muted sea-glass */
-  --color-accent-soft: #d9e8e2; /* pale sea-glass */
-  --color-sand: #e7dcc6; /* soft sand secondary */
-  --color-warn: #c08457; /* gentle terracotta, never alarming red */
+  /* Calm ocean palette — deep, restful blues; no vivid/tropical tones */
+  --color-bg: #e8f1f5; /* cool, soft off-white */
+  --color-surface: #ffffff; /* crisp card surface */
+  --color-ink: #0a1f3d; /* deep ocean navy text */
+  --color-ink-soft: #587490; /* muted slate-blue secondary text */
+  --color-accent: #2f6e93; /* calm ocean blue */
+  --color-accent-soft: #c6deea; /* pale ocean blue */
+  --color-sand: #d6e2ea; /* soft blue-grey for gentle surfaces */
+  --color-deep: #16425b; /* deep ocean — prominent / safety actions */
 }
 
 html,
