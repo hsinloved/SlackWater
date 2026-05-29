@@ -19,7 +19,7 @@ function targetScale(phase: SessionPhase): number {
       return 1;
     case 'preparation-exhale':
     case 'empty-lung-stretch':
-      return 0.6;
+      return 0.62;
     case 'recovery':
     case 'rest':
       return 0.8;
@@ -29,7 +29,7 @@ function targetScale(phase: SessionPhase): number {
 }
 
 const SIZE = 300;
-const ORB = 220;
+const ORB = 252;
 
 export function BreathingCircle({
   phase,
@@ -40,11 +40,33 @@ export function BreathingCircle({
   const scale = targetScale(phase);
 
   // Long, soft easing so the orb breathes rather than snaps (diffuse feel).
-  const breathe: CSSProperties = {
-    transform: `scale(${scale})`,
+  // NB: transforms live on each layer (not a shared wrapper) so the video's
+  // `screen` blend keeps compositing against the page backdrop — no isolation.
+  const transition = {
     transitionProperty: 'transform',
     transitionDuration: `${durationSeconds}s`,
     transitionTimingFunction: 'cubic-bezier(0.37, 0, 0.63, 1)',
+  } as const;
+
+  const orbStyle: CSSProperties = {
+    width: ORB,
+    height: ORB,
+    // `screen` turns the video's black background transparent, so the orb melts
+    // into the dark backdrop with no hard circular edge.
+    mixBlendMode: 'screen',
+    filter: 'saturate(0.85) brightness(1.14) contrast(1.04) hue-rotate(-8deg)',
+    transform: `scale(${scale})`,
+    ...transition,
+  };
+
+  const glowStyle: CSSProperties = {
+    width: SIZE,
+    height: SIZE,
+    background:
+      'radial-gradient(circle, rgba(110,205,210,0.4) 0%, rgba(31,128,141,0.16) 45%, rgba(31,128,141,0) 70%)',
+    filter: 'blur(30px)',
+    transform: `scale(${scale * 1.12})`,
+    ...transition,
   };
 
   return (
@@ -52,58 +74,19 @@ export function BreathingCircle({
       className="relative flex items-center justify-center"
       style={{ width: SIZE, height: SIZE }}
     >
-      {/* Deep parallax glow — scales a touch more than the orb for depth */}
-      <div
-        className="absolute rounded-full animate-glow"
-        style={{
-          ...breathe,
-          width: SIZE,
-          height: SIZE,
-          transform: `scale(${scale * 1.12})`,
-          background:
-            'radial-gradient(circle, rgba(110,205,210,0.5) 0%, rgba(31,128,141,0.22) 45%, rgba(31,128,141,0) 70%)',
-          filter: 'blur(30px)',
-        }}
-      />
+      {/* Soft bloom behind the orb for depth (gentle parallax + glow) */}
+      <div className="absolute rounded-full animate-glow" style={glowStyle} />
 
-      {/* The breathing orb — your video, calmed toward the brand teal */}
-      <div
-        className="absolute flex items-center justify-center"
-        style={{ ...breathe, width: SIZE, height: SIZE }}
-      >
-        <div
-          className="absolute overflow-hidden rounded-full"
-          style={{
-            width: ORB,
-            height: ORB,
-            boxShadow:
-              'inset 0 0 30px 8px rgba(255,255,255,0.45), inset 0 -14px 40px rgba(10,80,95,0.28), 0 30px 70px -20px rgba(10,70,90,0.55)',
-          }}
-        >
-          <video
-            className="absolute inset-0 h-full w-full object-cover"
-            style={{ filter: 'saturate(0.5) brightness(1.05)', transform: 'scale(1.15)' }}
-            src={videoSrc}
-            autoPlay
-            loop
-            muted
-            playsInline
-          />
-          {/* Tint the iridescence toward the brand ocean teal */}
-          <div
-            className="absolute inset-0"
-            style={{ background: '#1f808d', mixBlendMode: 'color', opacity: 0.45 }}
-          />
-          {/* Soft luminous centre */}
-          <div
-            className="absolute inset-0 rounded-full"
-            style={{
-              background:
-                'radial-gradient(circle at 50% 44%, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.28) 22%, rgba(255,255,255,0) 50%)',
-            }}
-          />
-        </div>
-      </div>
+      {/* The breathing orb — your video, black blended away via `screen` */}
+      <video
+        className="absolute inset-0 m-auto"
+        style={orbStyle}
+        src={videoSrc}
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
 
       <div className="relative flex flex-col items-center justify-center text-center">
         {children}
