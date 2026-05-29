@@ -3,25 +3,21 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AppLayout } from '../components/AppLayout';
 import { Button } from '../components/Button';
 import { appendSession } from '../features/history/historyStorage';
-import {
-  FEELING_LABELS,
-  type Feeling,
-} from '../features/history/historyTypes';
+import { FEELINGS, type Feeling } from '../features/history/historyTypes';
 import type { SessionMode } from '../features/session/sessionTypes';
 import type { SessionSummary } from '../features/session/useSessionTimer';
+import { useLanguage } from '../i18n/LanguageProvider';
 import { formatDuration } from '../utils/format';
 
 interface LocationState {
   summary?: SessionSummary;
   mode?: SessionMode;
-  modeTitle?: string;
 }
-
-const FEELINGS: Feeling[] = ['calm', 'neutral', 'tense', 'uncomfortable'];
 
 export function Complete() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { t, lang } = useLanguage();
   const state = location.state as LocationState | null;
 
   const [feeling, setFeeling] = useState<Feeling | null>(null);
@@ -29,11 +25,12 @@ export function Complete() {
   const [holdInput, setHoldInput] = useState('');
   const [notes, setNotes] = useState('');
 
-  if (!state?.summary || !state.mode || !state.modeTitle) {
+  if (!state?.summary || !state.mode) {
     return <Navigate to="/" replace />;
   }
 
-  const { summary, mode, modeTitle } = state;
+  const { summary, mode } = state;
+  const modeTitle = t(`modes.${mode}.title`);
 
   const save = () => {
     const parsedHold = holdInput.trim() === '' ? null : Number(holdInput);
@@ -58,21 +55,22 @@ export function Complete() {
     <AppLayout>
       <header className="mb-5">
         <h1 className="text-2xl font-semibold text-ink">
-          {summary.finishedNaturally ? 'Session complete' : 'Session ended'}
+          {summary.finishedNaturally
+            ? t('complete.titleComplete')
+            : t('complete.titleEnded')}
         </h1>
         <p className="mt-1 text-ink-soft">
-          {modeTitle} · {formatDuration(summary.elapsedSeconds)} ·{' '}
-          {summary.roundsCompleted}/{summary.totalRounds} rounds
+          {modeTitle} · {formatDuration(summary.elapsedSeconds, lang)} ·{' '}
+          {summary.roundsCompleted}/{summary.totalRounds}{' '}
+          {t('history.roundsUnit')}
         </p>
-        <p className="mt-1 text-sm text-ink-soft">
-          Recover slowly and notice how you feel.
-        </p>
+        <p className="mt-1 text-sm text-ink-soft">{t('complete.recoverNote')}</p>
       </header>
 
       <section className="flex flex-col gap-5">
         <div>
           <h2 className="mb-2 text-base font-medium text-ink">
-            How did the session feel?
+            {t('complete.feelingQ')}
           </h2>
           <div className="grid grid-cols-2 gap-2">
             {FEELINGS.map((f) => (
@@ -85,7 +83,7 @@ export function Complete() {
                     : 'bg-surface text-ink'
                 }`}
               >
-                {FEELING_LABELS[f]}
+                {t(`feeling.${f}`)}
               </button>
             ))}
           </div>
@@ -93,7 +91,7 @@ export function Complete() {
 
         <div>
           <h2 className="mb-2 text-base font-medium text-ink">
-            Perceived effort (optional)
+            {t('complete.effortQ')}
           </h2>
           <div className="flex gap-2">
             {[1, 2, 3, 4, 5].map((n) => (
@@ -115,7 +113,7 @@ export function Complete() {
             htmlFor="hold"
             className="mb-2 block text-base font-medium text-ink"
           >
-            Breath-hold completed (optional)
+            {t('complete.holdLabel')}
           </label>
           <input
             id="hold"
@@ -124,7 +122,7 @@ export function Complete() {
             placeholder={
               summary.longestHoldSeconds
                 ? `${summary.longestHoldSeconds}`
-                : 'seconds'
+                : t('complete.holdPlaceholder')
             }
             value={holdInput}
             onChange={(e) => setHoldInput(e.target.value)}
@@ -137,12 +135,12 @@ export function Complete() {
             htmlFor="notes"
             className="mb-2 block text-base font-medium text-ink"
           >
-            Notes
+            {t('complete.notesLabel')}
           </label>
           <textarea
             id="notes"
             rows={4}
-            placeholder="Where did you feel tension first? When did the urge to breathe arrive? How full was your inhale?"
+            placeholder={t('complete.notesPlaceholder')}
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             className="w-full resize-none rounded-2xl bg-surface px-4 py-3 text-ink shadow-sm outline-none focus:ring-2 focus:ring-accent/40"
@@ -152,14 +150,14 @@ export function Complete() {
 
       <div className="mt-6 flex flex-col gap-3">
         <Button className="w-full" onClick={save}>
-          Save reflection
+          {t('complete.save')}
         </Button>
         <Button
           variant="ghost"
           className="w-full"
           onClick={() => navigate('/', { replace: true })}
         >
-          Skip
+          {t('complete.skip')}
         </Button>
       </div>
     </AppLayout>

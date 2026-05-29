@@ -2,12 +2,12 @@ import type { SessionMode } from '../session/sessionTypes';
 
 export type Feeling = 'calm' | 'neutral' | 'tense' | 'uncomfortable';
 
-export const FEELING_LABELS: Record<Feeling, string> = {
-  calm: 'Calm',
-  neutral: 'Neutral',
-  tense: 'Tense',
-  uncomfortable: 'Dizzy / uncomfortable',
-};
+export const FEELINGS: Feeling[] = [
+  'calm',
+  'neutral',
+  'tense',
+  'uncomfortable',
+];
 
 export interface SessionRecord {
   id: string;

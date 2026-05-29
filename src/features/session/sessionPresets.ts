@@ -6,30 +6,6 @@ import type {
   StaticHoldConfig,
 } from './sessionTypes';
 
-export const MODE_META: Record<
-  SessionMode,
-  { title: string; subtitle: string; description: string }
-> = {
-  relaxed: {
-    title: 'Relaxed Breathing',
-    subtitle: 'Guided inhale / exhale rhythm',
-    description:
-      'A gentle rhythm to settle the body. No breath-hold — just slow, even breathing.',
-  },
-  'static-hold': {
-    title: 'Gentle Static Hold',
-    subtitle: 'Preparation, comfortable hold, recovery',
-    description:
-      'Prepare with relaxed breathing, take a comfortable inhale, then hold gently. End early whenever you need to.',
-  },
-  'rv-mobility': {
-    title: 'RV Mobility / Empty-Lung Stretch',
-    subtitle: 'Dry-land only · gentle mobility',
-    description:
-      'A short, gentle empty-lung stretch for mobility — not a max-hold exercise. Never force the exhale.',
-  },
-};
-
 export const DEFAULT_RELAXED: RelaxedConfig = {
   mode: 'relaxed',
   inhaleSeconds: 4,

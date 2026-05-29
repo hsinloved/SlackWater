@@ -8,8 +8,10 @@ import {
   loadHistory,
 } from '../features/history/historyStorage';
 import type { SessionRecord } from '../features/history/historyTypes';
+import { useLanguage } from '../i18n/LanguageProvider';
 
 export function History() {
+  const { t } = useLanguage();
   const [records, setRecords] = useState<SessionRecord[]>(() => loadHistory());
   const [confirming, setConfirming] = useState(false);
 
@@ -22,10 +24,10 @@ export function History() {
   return (
     <AppLayout>
       <Link to="/" className="mb-4 text-ink-soft hover:text-ink">
-        ← Home
+        ← {t('common.home')}
       </Link>
       <h1 className="mb-4 text-2xl font-semibold text-ink">
-        Practice history
+        {t('history.title')}
       </h1>
 
       <HistoryList records={records} />
@@ -35,14 +37,14 @@ export function History() {
           {confirming ? (
             <div className="flex gap-3">
               <Button variant="warn" className="flex-1" onClick={handleClear}>
-                Clear all
+                {t('history.clearAll')}
               </Button>
               <Button
                 variant="ghost"
                 className="flex-1"
                 onClick={() => setConfirming(false)}
               >
-                Cancel
+                {t('history.cancel')}
               </Button>
             </div>
           ) : (
@@ -51,7 +53,7 @@ export function History() {
               className="w-full"
               onClick={() => setConfirming(true)}
             >
-              Clear history
+              {t('history.clear')}
             </Button>
           )}
         </div>

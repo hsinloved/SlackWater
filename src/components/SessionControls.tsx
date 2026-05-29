@@ -1,4 +1,5 @@
 import { Button } from './Button';
+import { useLanguage } from '../i18n/LanguageProvider';
 import type { TimerStatus } from '../features/session/useSessionTimer';
 
 interface SessionControlsProps {
@@ -20,27 +21,28 @@ export function SessionControls({
   onStop,
   onEndHoldEarly,
 }: SessionControlsProps) {
+  const { t } = useLanguage();
   return (
     <div className="flex w-full max-w-sm flex-col gap-3">
       {canEndHoldEarly && (
         <Button variant="warn" className="w-full" onClick={onEndHoldEarly}>
-          I need to breathe
+          {t('controls.needBreathe')}
         </Button>
       )}
 
       {status === 'idle' && (
         <Button className="w-full" onClick={onStart}>
-          Begin
+          {t('common.begin')}
         </Button>
       )}
 
       {status === 'running' && (
         <div className="flex gap-3">
           <Button variant="secondary" className="flex-1" onClick={onPause}>
-            Pause
+            {t('controls.pause')}
           </Button>
           <Button variant="ghost" className="flex-1" onClick={onStop}>
-            Stop
+            {t('controls.stop')}
           </Button>
         </div>
       )}
@@ -48,10 +50,10 @@ export function SessionControls({
       {status === 'paused' && (
         <div className="flex gap-3">
           <Button className="flex-1" onClick={onResume}>
-            Resume
+            {t('controls.resume')}
           </Button>
           <Button variant="ghost" className="flex-1" onClick={onStop}>
-            Stop
+            {t('controls.stop')}
           </Button>
         </div>
       )}

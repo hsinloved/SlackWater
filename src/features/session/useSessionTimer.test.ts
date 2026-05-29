@@ -6,23 +6,23 @@ import type { SessionPhaseStep } from './sessionTypes';
 const NOOP_OPTS = { soundEnabled: false, vibrationEnabled: false };
 
 const relaxedPlan: SessionPhaseStep[] = [
-  { phase: 'preparation-inhale', durationSeconds: 4, label: 'Inhale', cueText: '' },
-  { phase: 'preparation-exhale', durationSeconds: 6, label: 'Exhale', cueText: '' },
-  { phase: 'complete', durationSeconds: 0, label: 'Done', cueText: '' },
+  { phase: 'preparation-inhale', durationSeconds: 4, labelKey: 'phase.inhale', cueKey: '' },
+  { phase: 'preparation-exhale', durationSeconds: 6, labelKey: 'phase.exhale', cueKey: '' },
+  { phase: 'complete', durationSeconds: 0, labelKey: 'phase.complete', cueKey: '' },
 ];
 
 const holdPlan: SessionPhaseStep[] = [
   {
     phase: 'breath-hold',
     durationSeconds: 30,
-    label: 'Hold',
-    cueText: '',
+    labelKey: 'phase.breathHold',
+    cueKey: '',
     allowEarlyExit: true,
     roundNumber: 1,
     totalRounds: 1,
   },
-  { phase: 'recovery', durationSeconds: 5, label: 'Recovery', cueText: '' },
-  { phase: 'complete', durationSeconds: 0, label: 'Done', cueText: '' },
+  { phase: 'recovery', durationSeconds: 5, labelKey: 'phase.recovery', cueKey: '' },
+  { phase: 'complete', durationSeconds: 0, labelKey: 'phase.complete', cueKey: '' },
 ];
 
 beforeEach(() => {
@@ -40,7 +40,7 @@ describe('useSessionTimer', () => {
     );
     act(() => result.current.start());
     expect(result.current.status).toBe('running');
-    expect(result.current.currentStep?.label).toBe('Inhale');
+    expect(result.current.currentStep?.labelKey).toBe('phase.inhale');
     expect(result.current.remainingSeconds).toBe(4);
   });
 

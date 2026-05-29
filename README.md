@@ -20,6 +20,7 @@ performance.
 - Mandatory **safety acknowledgement** on first launch (stored in `localStorage`).
 - Post-session **reflection** (feeling, perceived effort, breath-hold time, notes) saved to a local **history**.
 - Installable, offline-capable PWA (manifest + service worker via `vite-plugin-pwa`).
+- **Bilingual**: British English and Taiwan Traditional Chinese (zh-TW), with a language toggle, auto-detection from the browser, and a saved preference. Translations live in `src/i18n/translations.ts`; the session engine emits translation keys so plans render in either language.
 
 ## Tech stack
 

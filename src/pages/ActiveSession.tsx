@@ -7,12 +7,12 @@ import { SafetyBanner } from '../components/SafetyBanner';
 import { SessionControls } from '../components/SessionControls';
 import { TimerDisplay } from '../components/TimerDisplay';
 import { generateSessionPlan } from '../features/session/sessionEngine';
-import { MODE_META } from '../features/session/sessionPresets';
 import {
   useSessionTimer,
   type SessionSummary,
 } from '../features/session/useSessionTimer';
 import type { SessionConfig } from '../features/session/sessionTypes';
+import { useLanguage } from '../i18n/LanguageProvider';
 import { vibrationSupported } from '../utils/vibration';
 import { readFlagWithDefault, writeFlag } from '../utils/storage';
 
@@ -26,6 +26,7 @@ const VIBRATION_KEY = 'celeste.vibrationEnabled.v1';
 export function ActiveSession() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const config = (location.state as LocationState | null)?.config;
 
   const [soundEnabled, setSoundEnabled] = useState(() =>
@@ -48,7 +49,6 @@ export function ActiveSession() {
         state: {
           summary,
           mode: config.mode,
-          modeTitle: MODE_META[config.mode].title,
         },
       });
     },
@@ -94,7 +94,10 @@ export function ActiveSession() {
         <SafetyBanner />
         {step?.roundNumber && (
           <span className="ml-3 shrink-0 text-sm text-ink-soft">
-            Round {step.roundNumber}/{step.totalRounds}
+            {t('active.round', {
+              n: step.roundNumber,
+              total: step.totalRounds ?? 1,
+            })}
           </span>
         )}
       </div>
@@ -108,7 +111,9 @@ export function ActiveSession() {
           <TimerDisplay seconds={timer.remainingSeconds} />
         </BreathingCircle>
 
-        {step && <PhaseCue label={step.label} cueText={step.cueText} />}
+        {step && (
+          <PhaseCue label={t(step.labelKey)} cueText={t(step.cueKey)} />
+        )}
       </div>
 
       <SessionControls
@@ -129,7 +134,9 @@ export function ActiveSession() {
           className="text-ink-soft hover:text-ink"
           aria-pressed={soundEnabled}
         >
-          {soundEnabled ? '🔔 Sound on' : '🔕 Sound off'}
+          {soundEnabled
+            ? `🔔 ${t('active.soundOn')}`
+            : `🔕 ${t('active.soundOff')}`}
         </button>
         {vibrationSupported() && (
           <button
@@ -137,7 +144,9 @@ export function ActiveSession() {
             className="text-ink-soft hover:text-ink"
             aria-pressed={vibrationEnabled}
           >
-            {vibrationEnabled ? '📳 Vibration on' : '📴 Vibration off'}
+            {vibrationEnabled
+              ? `📳 ${t('active.vibrationOn')}`
+              : `📴 ${t('active.vibrationOff')}`}
           </button>
         )}
       </div>

@@ -5,7 +5,6 @@ import { Button } from '../components/Button';
 import { NumberField } from '../components/NumberField';
 import {
   LONG_HOLD_WARNING_SECONDS,
-  MODE_META,
   defaultConfigFor,
 } from '../features/session/sessionPresets';
 import {
@@ -16,6 +15,7 @@ import type {
   SessionConfig,
   SessionMode,
 } from '../features/session/sessionTypes';
+import { useLanguage } from '../i18n/LanguageProvider';
 import { formatDuration } from '../utils/format';
 
 const VALID_MODES: SessionMode[] = ['relaxed', 'static-hold', 'rv-mobility'];
@@ -27,6 +27,7 @@ function isValidMode(mode: string | undefined): mode is SessionMode {
 export function Setup() {
   const { mode } = useParams();
   const navigate = useNavigate();
+  const { t, lang } = useLanguage();
   const [config, setConfig] = useState<SessionConfig>(() =>
     defaultConfigFor(isValidMode(mode) ? mode : 'relaxed'),
   );
@@ -36,63 +37,69 @@ export function Setup() {
     return null;
   }
 
-  const meta = MODE_META[config.mode];
   const update = (patch: Partial<SessionConfig>) =>
     setConfig((c) => ({ ...c, ...patch }) as SessionConfig);
 
   const estimate = formatDuration(
     planDurationSeconds(generateSessionPlan(config)),
+    lang,
   );
 
   const startSession = () => {
     navigate('/session', { state: { config } });
   };
 
+  const sec = t('unit.s');
+
   return (
     <AppLayout>
       <Link to="/" className="mb-4 text-ink-soft hover:text-ink">
-        ← Home
+        ← {t('common.home')}
       </Link>
-      <h1 className="text-2xl font-semibold text-ink">{meta.title}</h1>
-      <p className="mt-1 mb-5 text-sm text-ink-soft">{meta.description}</p>
+      <h1 className="text-2xl font-semibold text-ink">
+        {t(`modes.${config.mode}.title`)}
+      </h1>
+      <p className="mt-1 mb-5 text-sm text-ink-soft">
+        {t(`modes.${config.mode}.desc`)}
+      </p>
 
       <div className="flex flex-col gap-3">
         {config.mode === 'relaxed' && (
           <>
             <NumberField
-              label="Inhale"
-              unit="s"
+              label={t('setup.inhale')}
+              unit={sec}
               value={config.inhaleSeconds}
               min={1}
               max={20}
               onChange={(v) => update({ inhaleSeconds: v })}
             />
             <NumberField
-              label="Exhale"
-              unit="s"
+              label={t('setup.exhale')}
+              unit={sec}
               value={config.exhaleSeconds}
               min={1}
               max={20}
               onChange={(v) => update({ exhaleSeconds: v })}
             />
             <NumberField
-              label="Hold after inhale"
-              unit="s"
+              label={t('setup.holdAfterInhale')}
+              unit={sec}
               value={config.holdAfterInhaleSeconds}
               min={0}
               max={20}
               onChange={(v) => update({ holdAfterInhaleSeconds: v })}
             />
             <NumberField
-              label="Hold after exhale"
-              unit="s"
+              label={t('setup.holdAfterExhale')}
+              unit={sec}
               value={config.holdAfterExhaleSeconds}
               min={0}
               max={20}
               onChange={(v) => update({ holdAfterExhaleSeconds: v })}
             />
             <NumberField
-              label="Cycles"
+              label={t('setup.cycles')}
               value={config.cycles}
               min={1}
               max={60}
@@ -104,31 +111,31 @@ export function Setup() {
         {config.mode === 'static-hold' && (
           <>
             <NumberField
-              label="Preparation cycles"
+              label={t('setup.prepCycles')}
               value={config.prepCycles}
               min={1}
               max={15}
               onChange={(v) => update({ prepCycles: v })}
             />
             <NumberField
-              label="Inhale"
-              unit="s"
+              label={t('setup.inhale')}
+              unit={sec}
               value={config.inhaleSeconds}
               min={1}
               max={20}
               onChange={(v) => update({ inhaleSeconds: v })}
             />
             <NumberField
-              label="Exhale"
-              unit="s"
+              label={t('setup.exhale')}
+              unit={sec}
               value={config.exhaleSeconds}
               min={1}
               max={20}
               onChange={(v) => update({ exhaleSeconds: v })}
             />
             <NumberField
-              label="Breath-hold target"
-              unit="s"
+              label={t('setup.breathHoldTarget')}
+              unit={sec}
               value={config.breathHoldSeconds}
               min={5}
               max={300}
@@ -137,27 +144,25 @@ export function Setup() {
             />
             {config.breathHoldSeconds > LONG_HOLD_WARNING_SECONDS && (
               <p className="rounded-2xl bg-sand/60 px-4 py-3 text-sm text-ink">
-                That's a long hold. There's no need to chase a big number —
-                consistency and comfort matter more than duration. You can end
-                any hold early.
+                {t('setup.longHoldWarning')}
               </p>
             )}
             <NumberField
-              label="Recovery cycles"
+              label={t('setup.recoveryCycles')}
               value={config.recoveryCycles}
               min={1}
               max={10}
               onChange={(v) => update({ recoveryCycles: v })}
             />
             <NumberField
-              label="Rounds"
+              label={t('setup.rounds')}
               value={config.rounds}
               min={1}
               max={6}
               onChange={(v) => update({ rounds: v })}
             />
             <p className="px-1 text-sm text-ink-soft">
-              Final inhale cue: “Take a comfortable 70–80% inhale.”
+              {t('setup.finalInhaleNote')}
             </p>
           </>
         )}
@@ -165,43 +170,42 @@ export function Setup() {
         {config.mode === 'rv-mobility' && (
           <>
             <p className="rounded-2xl bg-sand/60 px-4 py-3 text-sm text-ink">
-              Dry-land only. This is gentle mobility, not a max-hold exercise.
-              Never force the exhale.
+              {t('setup.rvWarning')}
             </p>
             <NumberField
-              label="Preparation cycles"
+              label={t('setup.prepCycles')}
               value={config.prepCycles}
               min={1}
               max={15}
               onChange={(v) => update({ prepCycles: v })}
             />
             <NumberField
-              label="Inhale"
-              unit="s"
+              label={t('setup.inhale')}
+              unit={sec}
               value={config.inhaleSeconds}
               min={1}
               max={20}
               onChange={(v) => update({ inhaleSeconds: v })}
             />
             <NumberField
-              label="Exhale"
-              unit="s"
+              label={t('setup.exhale')}
+              unit={sec}
               value={config.exhaleSeconds}
               min={1}
               max={20}
               onChange={(v) => update({ exhaleSeconds: v })}
             />
             <NumberField
-              label="Empty-lung stretch"
-              unit="s"
+              label={t('setup.emptyStretch')}
+              unit={sec}
               value={config.emptyLungStretchSeconds}
               min={2}
               max={10}
               onChange={(v) => update({ emptyLungStretchSeconds: v })}
             />
             <NumberField
-              label="Recovery"
-              unit="s"
+              label={t('setup.recovery')}
+              unit={sec}
               value={config.recoverySeconds}
               min={10}
               max={120}
@@ -209,7 +213,7 @@ export function Setup() {
               onChange={(v) => update({ recoverySeconds: v })}
             />
             <NumberField
-              label="Rounds"
+              label={t('setup.rounds')}
               value={config.rounds}
               min={1}
               max={5}
@@ -220,12 +224,12 @@ export function Setup() {
       </div>
 
       <p className="mt-5 text-center text-sm text-ink-soft">
-        Estimated duration: {estimate}
+        {t('setup.estimate', { duration: estimate })}
       </p>
 
       <div className="mt-3">
         <Button className="w-full" onClick={startSession}>
-          Begin
+          {t('common.begin')}
         </Button>
       </div>
     </AppLayout>

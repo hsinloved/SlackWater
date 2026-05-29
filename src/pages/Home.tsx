@@ -1,58 +1,60 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { AppLayout } from '../components/AppLayout';
-import { MODE_META } from '../features/session/sessionPresets';
+import { LanguageToggle } from '../components/LanguageToggle';
+import { useLanguage } from '../i18n/LanguageProvider';
 import type { SessionMode } from '../features/session/sessionTypes';
 
 const MODES: SessionMode[] = ['relaxed', 'static-hold', 'rv-mobility'];
 
 export function Home() {
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   return (
     <AppLayout>
-      <header className="mb-8 mt-2 animate-fade-in">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">
-          Breathwork
-        </p>
-        <h1 className="mt-1 text-4xl font-semibold tracking-tight text-ink">
-          Slack Water
-        </h1>
+      <header className="mb-8 mt-2 flex animate-fade-in items-start justify-between gap-4">
+        <div>
+          <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">
+            {t('home.eyebrow')}
+          </p>
+          <h1 className="mt-1 text-4xl font-semibold tracking-tight text-ink">
+            Slack Water
+          </h1>
+        </div>
+        <LanguageToggle />
       </header>
 
       <div className="flex flex-col gap-3">
-        {MODES.map((mode) => {
-          const meta = MODE_META[mode];
-          return (
-            <button
-              key={mode}
-              onClick={() => navigate(`/setup/${mode}`)}
-              className="group flex animate-fade-in items-center justify-between gap-4 rounded-3xl bg-surface px-6 py-6 text-left shadow-sm transition active:scale-[0.99] hover:shadow-md"
+        {MODES.map((mode) => (
+          <button
+            key={mode}
+            onClick={() => navigate(`/setup/${mode}`)}
+            className="group flex animate-fade-in items-center justify-between gap-4 rounded-3xl bg-surface px-6 py-6 text-left shadow-sm transition active:scale-[0.99] hover:shadow-md"
+          >
+            <span>
+              <span className="block text-xl font-medium text-ink">
+                {t(`modes.${mode}.title`)}
+              </span>
+              <span className="mt-0.5 block text-sm text-ink-soft">
+                {t(`modes.${mode}.subtitle`)}
+              </span>
+            </span>
+            <span
+              aria-hidden="true"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent transition group-hover:bg-accent group-hover:text-white"
             >
-              <span>
-                <span className="block text-xl font-medium text-ink">
-                  {meta.title}
-                </span>
-                <span className="mt-0.5 block text-sm text-ink-soft">
-                  {meta.subtitle}
-                </span>
-              </span>
-              <span
-                aria-hidden="true"
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent transition group-hover:bg-accent group-hover:text-white"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M9 6l6 6-6 6"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
-            </button>
-          );
-        })}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M9 6l6 6-6 6"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+          </button>
+        ))}
       </div>
 
       <div className="mt-auto flex flex-col items-center gap-4 pt-10">
@@ -60,11 +62,10 @@ export function Home() {
           to="/history"
           className="text-base font-medium text-accent underline-offset-4 hover:underline"
         >
-          Practice history
+          {t('home.history')}
         </Link>
         <p className="text-center text-xs leading-relaxed text-ink-soft">
-          Dry-land only. Never practise breath-holding in water. Stop if you
-          feel unwell.
+          {t('home.safety')}
         </p>
       </div>
     </AppLayout>

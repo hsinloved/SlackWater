@@ -1,4 +1,5 @@
-import { FEELING_LABELS, type SessionRecord } from './historyTypes';
+import type { SessionRecord } from './historyTypes';
+import { useLanguage } from '../../i18n/LanguageProvider';
 import { formatDate, formatDuration } from '../../utils/format';
 
 interface HistoryListProps {
@@ -6,11 +7,12 @@ interface HistoryListProps {
 }
 
 export function HistoryList({ records }: HistoryListProps) {
+  const { t, lang } = useLanguage();
+
   if (records.length === 0) {
     return (
       <p className="rounded-2xl bg-surface px-5 py-8 text-center text-ink-soft">
-        No sessions yet. Your reflections will appear here after your first
-        practice.
+        {t('history.empty')}
       </p>
     );
   }
@@ -18,25 +20,26 @@ export function HistoryList({ records }: HistoryListProps) {
   return (
     <ul className="flex flex-col gap-3">
       {records.map((r) => (
-        <li
-          key={r.id}
-          className="rounded-2xl bg-surface px-5 py-4 shadow-sm"
-        >
+        <li key={r.id} className="rounded-2xl bg-surface px-5 py-4 shadow-sm">
           <div className="flex items-baseline justify-between gap-3">
-            <span className="font-medium text-ink">{r.modeTitle}</span>
-            <span className="text-sm text-ink-soft">{formatDate(r.date)}</span>
+            <span className="font-medium text-ink">
+              {t(`modes.${r.mode}.title`)}
+            </span>
+            <span className="text-sm text-ink-soft">
+              {formatDate(r.date, lang)}
+            </span>
           </div>
           <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm text-ink-soft">
-            <span>{formatDuration(r.totalDurationSeconds)}</span>
+            <span>{formatDuration(r.totalDurationSeconds, lang)}</span>
             <span>
-              {r.roundsCompleted}/{r.totalRounds} rounds
+              {r.roundsCompleted}/{r.totalRounds} {t('history.roundsUnit')}
             </span>
-            {r.feeling && <span>{FEELING_LABELS[r.feeling]}</span>}
+            {r.feeling && <span>{t(`feeling.${r.feeling}`)}</span>}
             {r.perceivedEffort != null && (
-              <span>effort {r.perceivedEffort}/5</span>
+              <span>{t('history.effortUnit', { n: r.perceivedEffort })}</span>
             )}
             {r.breathHoldSeconds != null && (
-              <span>hold {r.breathHoldSeconds}s</span>
+              <span>{t('history.holdUnit', { n: r.breathHoldSeconds })}</span>
             )}
           </div>
           {r.notes && (

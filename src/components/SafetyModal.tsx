@@ -1,10 +1,14 @@
 import { Button } from './Button';
+import { LanguageToggle } from './LanguageToggle';
+import { useLanguage } from '../i18n/LanguageProvider';
 
 interface SafetyModalProps {
   onAcknowledge: () => void;
 }
 
 export function SafetyModal({ onAcknowledge }: SafetyModalProps) {
+  const { t } = useLanguage();
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-ink/30 p-5 backdrop-blur-sm"
@@ -13,33 +17,24 @@ export function SafetyModal({ onAcknowledge }: SafetyModalProps) {
       aria-labelledby="safety-title"
     >
       <div className="w-full max-w-md animate-fade-in rounded-3xl bg-surface p-7 shadow-xl">
-        <h1
-          id="safety-title"
-          className="mb-4 text-2xl font-semibold text-ink"
-        >
-          Before you begin
-        </h1>
+        <div className="mb-4 flex items-start justify-between gap-4">
+          <h1
+            id="safety-title"
+            className="text-2xl font-semibold text-ink"
+          >
+            {t('safety.title')}
+          </h1>
+          <LanguageToggle />
+        </div>
         <div className="space-y-3 text-base leading-relaxed text-ink-soft">
-          <p>
-            This tool is for dry-land relaxation and breath-awareness practice
-            only.
-          </p>
-          <p>
-            Do not use it in water, in a bath, while driving, or alone during
-            any breath-hold practice.
-          </p>
-          <p>
-            Do not hyperventilate. Stop immediately if you feel dizzy, numb,
-            anxious, uncomfortable, or unwell.
-          </p>
-          <p>
-            This app is not a substitute for a certified freediving
-            instructor.
-          </p>
+          <p>{t('safety.p1')}</p>
+          <p>{t('safety.p2')}</p>
+          <p>{t('safety.p3')}</p>
+          <p>{t('safety.p4')}</p>
         </div>
         <div className="mt-7">
           <Button className="w-full" onClick={onAcknowledge}>
-            I understand
+            {t('safety.ack')}
           </Button>
         </div>
       </div>

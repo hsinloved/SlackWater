@@ -16,8 +16,10 @@ export type AudioCue = 'bell' | 'low' | 'chime' | 'double-chime';
 export interface SessionPhaseStep {
   phase: SessionPhase;
   durationSeconds: number;
-  label: string;
-  cueText: string;
+  /** Translation key for the phase label (resolved at render time). */
+  labelKey: string;
+  /** Translation key for the cue text (resolved at render time). */
+  cueKey: string;
   audioCue?: AudioCue;
   /** When true (breath-hold), the user may end this step early via "I need to breathe". */
   allowEarlyExit?: boolean;

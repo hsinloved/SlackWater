@@ -8,25 +8,10 @@ import type {
 } from './sessionTypes';
 
 /**
- * Calm, body-aware cue copy. We deliberately avoid competitive language
- * ("push", "max", "beat your record") and keep everything soft.
+ * Steps carry translation keys (not literal copy) so the same plan renders in
+ * either language. Calm, body-aware wording lives in the i18n dictionary; we
+ * deliberately avoid competitive language ("push", "max", "beat your record").
  */
-const CUES = {
-  inhale: 'Take a comfortable inhale. Let the belly rise first.',
-  exhale: 'Slow, relaxed exhale. Let the shoulders drop.',
-  holdAfterInhale: 'Hold gently. Stay soft.',
-  holdAfterExhale: 'Rest at empty. No tension.',
-  finalInhale: 'Take a comfortable 70–80% inhale, not a maximum inhale.',
-  breathHold:
-    'Hold gently. Relax your jaw. Notice the first urge to breathe — end early if needed.',
-  emptyExhale:
-    'Gently exhale to a natural, comfortable empty point. Do not force.',
-  emptyStretch:
-    'Soft empty-lung stretch. Keep it gentle — this is mobility, not a hold.',
-  recovery: 'Small inhale, relaxed exhale. Breathe normally.',
-  rest: 'Rest and breathe normally. Let everything settle.',
-  complete: 'Session complete. Recover slowly and notice how you feel.',
-} as const;
 
 function inhaleStep(
   seconds: number,
@@ -36,8 +21,8 @@ function inhaleStep(
   return {
     phase: 'preparation-inhale',
     durationSeconds: seconds,
-    label: 'Inhale',
-    cueText: CUES.inhale,
+    labelKey: 'phase.inhale',
+    cueKey: 'cue.inhale',
     audioCue: 'bell',
     roundNumber,
     totalRounds,
@@ -52,8 +37,8 @@ function exhaleStep(
   return {
     phase: 'preparation-exhale',
     durationSeconds: seconds,
-    label: 'Exhale',
-    cueText: CUES.exhale,
+    labelKey: 'phase.exhale',
+    cueKey: 'cue.exhale',
     audioCue: 'low',
     roundNumber,
     totalRounds,
@@ -68,8 +53,8 @@ function relaxedPlan(config: RelaxedConfig): SessionPhaseStep[] {
       steps.push({
         phase: 'breath-hold',
         durationSeconds: config.holdAfterInhaleSeconds,
-        label: 'Hold',
-        cueText: CUES.holdAfterInhale,
+        labelKey: 'phase.holdInhale',
+        cueKey: 'cue.holdAfterInhale',
         audioCue: 'chime',
       });
     }
@@ -78,8 +63,8 @@ function relaxedPlan(config: RelaxedConfig): SessionPhaseStep[] {
       steps.push({
         phase: 'breath-hold',
         durationSeconds: config.holdAfterExhaleSeconds,
-        label: 'Hold (empty)',
-        cueText: CUES.holdAfterExhale,
+        labelKey: 'phase.holdExhale',
+        cueKey: 'cue.holdAfterExhale',
         audioCue: 'chime',
       });
     }
@@ -101,8 +86,8 @@ function staticHoldPlan(config: StaticHoldConfig): SessionPhaseStep[] {
     steps.push({
       phase: 'final-inhale',
       durationSeconds: config.inhaleSeconds,
-      label: 'Final inhale',
-      cueText: CUES.finalInhale,
+      labelKey: 'phase.finalInhale',
+      cueKey: 'cue.finalInhale',
       audioCue: 'bell',
       roundNumber: round,
       totalRounds: total,
@@ -111,8 +96,8 @@ function staticHoldPlan(config: StaticHoldConfig): SessionPhaseStep[] {
     steps.push({
       phase: 'breath-hold',
       durationSeconds: config.breathHoldSeconds,
-      label: 'Breath-hold',
-      cueText: CUES.breathHold,
+      labelKey: 'phase.breathHold',
+      cueKey: 'cue.breathHold',
       audioCue: 'chime',
       allowEarlyExit: true,
       roundNumber: round,
@@ -123,8 +108,8 @@ function staticHoldPlan(config: StaticHoldConfig): SessionPhaseStep[] {
       steps.push({
         phase: 'recovery',
         durationSeconds: config.inhaleSeconds + config.exhaleSeconds,
-        label: 'Recovery',
-        cueText: CUES.recovery,
+        labelKey: 'phase.recovery',
+        cueKey: 'cue.recovery',
         audioCue: r === 0 ? 'double-chime' : undefined,
         roundNumber: round,
         totalRounds: total,
@@ -135,8 +120,8 @@ function staticHoldPlan(config: StaticHoldConfig): SessionPhaseStep[] {
       steps.push({
         phase: 'rest',
         durationSeconds: config.exhaleSeconds,
-        label: 'Rest',
-        cueText: CUES.rest,
+        labelKey: 'phase.rest',
+        cueKey: 'cue.rest',
         roundNumber: round,
         totalRounds: total,
       });
@@ -158,8 +143,8 @@ function rvMobilityPlan(config: RvMobilityConfig): SessionPhaseStep[] {
     steps.push({
       phase: 'preparation-exhale',
       durationSeconds: config.exhaleSeconds,
-      label: 'Gentle exhale',
-      cueText: CUES.emptyExhale,
+      labelKey: 'phase.gentleExhale',
+      cueKey: 'cue.emptyExhale',
       audioCue: 'low',
       roundNumber: round,
       totalRounds: total,
@@ -168,8 +153,8 @@ function rvMobilityPlan(config: RvMobilityConfig): SessionPhaseStep[] {
     steps.push({
       phase: 'empty-lung-stretch',
       durationSeconds: config.emptyLungStretchSeconds,
-      label: 'Empty-lung stretch',
-      cueText: CUES.emptyStretch,
+      labelKey: 'phase.emptyStretch',
+      cueKey: 'cue.emptyStretch',
       audioCue: 'chime',
       roundNumber: round,
       totalRounds: total,
@@ -178,8 +163,8 @@ function rvMobilityPlan(config: RvMobilityConfig): SessionPhaseStep[] {
     steps.push({
       phase: 'recovery',
       durationSeconds: config.recoverySeconds,
-      label: 'Recovery',
-      cueText: CUES.recovery,
+      labelKey: 'phase.recovery',
+      cueKey: 'cue.recovery',
       audioCue: 'double-chime',
       roundNumber: round,
       totalRounds: total,
@@ -193,8 +178,8 @@ function completeStep(): SessionPhaseStep {
   return {
     phase: 'complete',
     durationSeconds: 0,
-    label: 'Round complete',
-    cueText: CUES.complete,
+    labelKey: 'phase.complete',
+    cueKey: 'cue.complete',
     audioCue: 'double-chime',
   };
 }
