@@ -5,7 +5,8 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(({ command }) => ({
   // Served from a subpath on GitHub Pages (project site); root in dev.
-  base: command === 'build' ? '/celeste-artist/' : '/',
+  // Must match the repo name exactly — GitHub Pages paths are case-sensitive.
+  base: command === 'build' ? '/SlackWater/' : '/',
   plugins: [
     react(),
     VitePWA({

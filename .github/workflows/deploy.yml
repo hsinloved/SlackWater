@@ -37,7 +37,11 @@ jobs:
       # deep-link refresh (e.g. /setup/relaxed) still boots the app.
       - run: cp dist/index.html dist/404.html
 
+      # enablement: true turns on GitHub Pages via the API if it isn't already,
+      # so no manual Settings step is needed (works on public repos).
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
