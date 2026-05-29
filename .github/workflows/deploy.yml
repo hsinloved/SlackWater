@@ -13,10 +13,11 @@ permissions:
   pages: write
   id-token: write
 
-# Only one concurrent deployment; cancel in-progress runs for new pushes.
+# Queue Pages deployments one at a time; don't cancel an in-progress deploy
+# (matches the official GitHub Pages workflow — avoids runs cancelling each other).
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
