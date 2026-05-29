@@ -7,11 +7,11 @@ interface TimerDisplayProps {
 export function TimerDisplay({ seconds }: TimerDisplayProps) {
   return (
     <div
-      className="font-light tabular-nums tracking-tight text-ink"
+      className="font-extralight tabular-nums tracking-tight text-white/85"
       style={{
-        fontSize: 'clamp(3.5rem, 18vw, 5.5rem)',
+        fontSize: 'clamp(2.75rem, 13vw, 4rem)',
         lineHeight: 1,
-        textShadow: '0 1px 18px rgba(255,255,255,0.85)',
+        textShadow: '0 2px 22px rgba(8,40,50,0.45)',
       }}
       aria-live="polite"
     >

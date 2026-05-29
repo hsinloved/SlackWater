@@ -25,7 +25,7 @@ export function SessionControls({
   return (
     <div className="flex w-full max-w-sm flex-col gap-3">
       {canEndHoldEarly && (
-        <Button variant="warn" className="w-full" onClick={onEndHoldEarly}>
+        <Button variant="light" className="w-full" onClick={onEndHoldEarly}>
           {t('controls.needBreathe')}
         </Button>
       )}
@@ -41,7 +41,7 @@ export function SessionControls({
           <Button variant="secondary" className="flex-1" onClick={onPause}>
             {t('controls.pause')}
           </Button>
-          <Button variant="ghost" className="flex-1" onClick={onStop}>
+          <Button variant="ghost-light" className="flex-1" onClick={onStop}>
             {t('controls.stop')}
           </Button>
         </div>
@@ -52,7 +52,7 @@ export function SessionControls({
           <Button className="flex-1" onClick={onResume}>
             {t('controls.resume')}
           </Button>
-          <Button variant="ghost" className="flex-1" onClick={onStop}>
+          <Button variant="ghost-light" className="flex-1" onClick={onStop}>
             {t('controls.stop')}
           </Button>
         </div>

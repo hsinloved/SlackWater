@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-type Variant = 'primary' | 'secondary' | 'ghost' | 'warn';
+type Variant = 'primary' | 'secondary' | 'ghost' | 'warn' | 'light' | 'ghost-light';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant;
@@ -14,6 +14,9 @@ const VARIANT_CLASSES: Record<Variant, string> = {
     'bg-accent-soft text-ink active:scale-[0.98] hover:brightness-[0.98]',
   ghost: 'bg-transparent text-ink-soft hover:text-ink',
   warn: 'bg-deep text-white active:scale-[0.98] hover:brightness-110',
+  // For the dark active-session backdrop
+  light: 'bg-white text-deep shadow active:scale-[0.98] hover:brightness-95',
+  'ghost-light': 'bg-transparent text-white/75 hover:text-white',
 };
 
 export function Button({

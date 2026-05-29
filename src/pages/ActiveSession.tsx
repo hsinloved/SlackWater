@@ -11,7 +11,10 @@ import {
   useSessionTimer,
   type SessionSummary,
 } from '../features/session/useSessionTimer';
-import type { SessionConfig } from '../features/session/sessionTypes';
+import type {
+  SessionConfig,
+  SessionPhase,
+} from '../features/session/sessionTypes';
 import { useLanguage } from '../i18n/LanguageProvider';
 import { vibrationSupported } from '../utils/vibration';
 import { readFlagWithDefault, writeFlag } from '../utils/storage';
@@ -22,6 +25,32 @@ interface LocationState {
 
 const SOUND_KEY = 'celeste.soundEnabled.v1';
 const VIBRATION_KEY = 'celeste.vibrationEnabled.v1';
+
+const VIDEO_SRC = `${import.meta.env.BASE_URL}breathing-orb.mp4`;
+
+/**
+ * Ambient "light" of the scene per phase. The central glow brightens on the
+ * inhale (like opening a window) and slowly fades to dark across a breath-hold
+ * — the gentle dimming is the time cue, in place of a progress ring.
+ */
+function targetBrightness(phase: SessionPhase | undefined): number {
+  switch (phase) {
+    case 'preparation-inhale':
+    case 'final-inhale':
+      return 1;
+    case 'preparation-exhale':
+    case 'empty-lung-stretch':
+      return 0.45;
+    case 'breath-hold':
+      return 0.06;
+    case 'recovery':
+      return 0.7;
+    case 'rest':
+      return 0.5;
+    default:
+      return 0.85;
+  }
+}
 
 export function ActiveSession() {
   const location = useLocation();
@@ -46,10 +75,7 @@ export function ActiveSession() {
       if (!config) return;
       navigate('/complete', {
         replace: true,
-        state: {
-          summary,
-          mode: config.mode,
-        },
+        state: { summary, mode: config.mode },
       });
     },
     [config, navigate],
@@ -73,9 +99,9 @@ export function ActiveSession() {
   }
 
   const step = timer.currentStep;
-  const progress = step && step.durationSeconds > 0
-    ? (step.durationSeconds - timer.remainingSeconds) / step.durationSeconds
-    : 0;
+  const brightness = targetBrightness(step?.phase);
+  // The ambient light eases over the phase duration — slow, diffuse, calm.
+  const ambientDuration = Math.max(1.2, step?.durationSeconds ?? 1.2);
 
   const toggleSound = () => {
     const next = !soundEnabled;
@@ -89,67 +115,89 @@ export function ActiveSession() {
   };
 
   return (
-    <AppLayout>
-      <div className="flex items-center justify-between">
-        <SafetyBanner />
-        {step?.roundNumber && (
-          <span className="ml-3 shrink-0 text-sm text-ink-soft">
-            {t('active.round', {
-              n: step.roundNumber,
-              total: step.totalRounds ?? 1,
-            })}
-          </span>
-        )}
+    <>
+      {/* Immersive ambient backdrop: deep ocean with a breathing central glow */}
+      <div
+        className="fixed inset-0"
+        style={{
+          zIndex: -1,
+          background:
+            'linear-gradient(180deg, #0c333d 0%, #061d26 60%, #03141a 100%)',
+        }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            opacity: brightness,
+            transitionProperty: 'opacity',
+            transitionDuration: `${ambientDuration}s`,
+            transitionTimingFunction: 'cubic-bezier(0.37, 0, 0.63, 1)',
+            background:
+              'radial-gradient(circle at 50% 44%, rgba(150,228,230,0.5) 0%, rgba(40,140,155,0.16) 34%, rgba(40,140,155,0) 62%)',
+          }}
+        />
       </div>
 
-      <div className="flex flex-1 flex-col items-center justify-center gap-8 py-6">
-        <BreathingCircle
-          phase={step?.phase ?? 'rest'}
-          durationSeconds={step?.durationSeconds ?? 0}
-          progress={progress}
-        >
-          <TimerDisplay seconds={timer.remainingSeconds} />
-        </BreathingCircle>
+      <AppLayout>
+        <div className="flex items-center justify-between">
+          <SafetyBanner />
+          {step?.roundNumber && (
+            <span className="ml-3 shrink-0 text-sm text-white/70">
+              {t('active.round', {
+                n: step.roundNumber,
+                total: step.totalRounds ?? 1,
+              })}
+            </span>
+          )}
+        </div>
 
-        {step && (
-          <PhaseCue label={t(step.labelKey)} cueText={t(step.cueKey)} />
-        )}
-      </div>
-
-      <SessionControls
-        status={timer.status}
-        canEndHoldEarly={
-          timer.status === 'running' && !!step?.allowEarlyExit
-        }
-        onStart={timer.start}
-        onPause={timer.pause}
-        onResume={timer.resume}
-        onStop={timer.stop}
-        onEndHoldEarly={timer.endHoldEarly}
-      />
-
-      <div className="mt-5 flex justify-center gap-6 text-sm">
-        <button
-          onClick={toggleSound}
-          className="text-ink-soft hover:text-ink"
-          aria-pressed={soundEnabled}
-        >
-          {soundEnabled
-            ? `🔔 ${t('active.soundOn')}`
-            : `🔕 ${t('active.soundOff')}`}
-        </button>
-        {vibrationSupported() && (
-          <button
-            onClick={toggleVibration}
-            className="text-ink-soft hover:text-ink"
-            aria-pressed={vibrationEnabled}
+        <div className="flex flex-1 flex-col items-center justify-center gap-10 py-6">
+          <BreathingCircle
+            phase={step?.phase ?? 'rest'}
+            durationSeconds={step?.durationSeconds ?? 0}
+            videoSrc={VIDEO_SRC}
           >
-            {vibrationEnabled
-              ? `📳 ${t('active.vibrationOn')}`
-              : `📴 ${t('active.vibrationOff')}`}
+            <TimerDisplay seconds={timer.remainingSeconds} />
+          </BreathingCircle>
+
+          {step && (
+            <PhaseCue label={t(step.labelKey)} cueText={t(step.cueKey)} />
+          )}
+        </div>
+
+        <SessionControls
+          status={timer.status}
+          canEndHoldEarly={timer.status === 'running' && !!step?.allowEarlyExit}
+          onStart={timer.start}
+          onPause={timer.pause}
+          onResume={timer.resume}
+          onStop={timer.stop}
+          onEndHoldEarly={timer.endHoldEarly}
+        />
+
+        <div className="mt-5 flex justify-center gap-6 text-sm">
+          <button
+            onClick={toggleSound}
+            className="text-white/55 transition hover:text-white/90"
+            aria-pressed={soundEnabled}
+          >
+            {soundEnabled
+              ? `🔔 ${t('active.soundOn')}`
+              : `🔕 ${t('active.soundOff')}`}
           </button>
-        )}
-      </div>
-    </AppLayout>
+          {vibrationSupported() && (
+            <button
+              onClick={toggleVibration}
+              className="text-white/55 transition hover:text-white/90"
+              aria-pressed={vibrationEnabled}
+            >
+              {vibrationEnabled
+                ? `📳 ${t('active.vibrationOn')}`
+                : `📴 ${t('active.vibrationOff')}`}
+            </button>
+          )}
+        </div>
+      </AppLayout>
+    </>
   );
 }
