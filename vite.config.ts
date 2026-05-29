@@ -3,7 +3,9 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  // Served from a subpath on GitHub Pages (project site); root in dev.
+  base: command === 'build' ? '/celeste-artist/' : '/',
   plugins: [
     react(),
     VitePWA({
@@ -18,7 +20,9 @@ export default defineConfig({
         background_color: '#f7f4ee',
         display: 'standalone',
         orientation: 'portrait',
-        start_url: '/',
+        // Relative so it resolves correctly under the GitHub Pages subpath.
+        start_url: '.',
+        scope: '.',
         icons: [
           {
             src: 'pwa-192x192.png',
@@ -47,4 +51,4 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
   },
-});
+}));
