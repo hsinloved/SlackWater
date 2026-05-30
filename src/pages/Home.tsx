@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AppLayout } from '../components/AppLayout';
 import { LanguageToggle } from '../components/LanguageToggle';
 import { LogoMark } from '../components/LogoMark';
+import { StreakRow } from '../components/StreakRow';
 import { useLanguage } from '../i18n/LanguageProvider';
 import type { SessionMode } from '../features/session/sessionTypes';
 
@@ -30,6 +31,8 @@ export function Home() {
         </div>
         <LanguageToggle />
       </header>
+
+      <StreakRow />
 
       <div className="flex flex-col gap-3">
         {MODES.map((mode) => (

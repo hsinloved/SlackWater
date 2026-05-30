@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AppLayout } from '../components/AppLayout';
 import { Button } from '../components/Button';
 import { appendSession } from '../features/history/historyStorage';
+import { markPracticedToday } from '../features/history/streakStorage';
 import {
   FEELINGS,
   SCALES,
@@ -31,6 +32,11 @@ export function Complete() {
   const [relaxedAtUrge, setRelaxedAtUrge] = useState<Scale | null>(null);
   const [holdInput, setHoldInput] = useState('');
   const [notes, setNotes] = useState('');
+
+  // Reaching this screen means a session finished — mark today as practised.
+  useEffect(() => {
+    if (state?.summary && state.mode) markPracticedToday();
+  }, []);
 
   const renderScale = (
     question: string,
