@@ -15,7 +15,7 @@ export function StreakRow() {
   const labels = WEEKDAY_LABELS[lang] ?? WEEKDAY_LABELS.en;
 
   return (
-    <section className="mb-6 flex flex-col items-center gap-1.5">
+    <section className="flex flex-col items-center gap-1.5">
       <p className="text-[11px] uppercase tracking-[0.18em] text-ink-soft/80">
         {t('streak.heading')}
       </p>

@@ -29,8 +29,6 @@ export function Home() {
         </p>
       </header>
 
-      <StreakRow />
-
       <div className="flex flex-col gap-3">
         {MODES.map((mode) => (
           <button
@@ -92,7 +90,8 @@ export function Home() {
         </span>
       </Link>
 
-      <div className="mt-auto flex flex-col items-center gap-4 pt-10">
+      <div className="mt-auto flex flex-col items-center gap-4 pt-8">
+        <StreakRow />
         <div className="flex w-full items-center justify-between gap-3">
           <Link
             to="/history"
