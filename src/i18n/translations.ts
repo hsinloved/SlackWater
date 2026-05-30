@@ -168,6 +168,7 @@ const en: Record<string, string> = {
     'Consistency over intensity. The goal is a quieter body and an easier breath, not a personal best.',
   'intro.continue': 'Continue',
   'streak.label': '{n}-day streak',
+  'streak.start': 'Last 7 days · finish a session to begin',
 
   'safety.title': 'Before you begin',
   'safety.p1':
@@ -331,6 +332,7 @@ const zhTW: Record<string, string> = {
     '穩定勝過強度。目標是更安靜的身體與更輕鬆的呼吸，不是個人紀錄。',
   'intro.continue': '繼續',
   'streak.label': '連續 {n} 天',
+  'streak.start': '最近 7 天 · 完成一次練習就開始',
 
   'safety.title': '開始之前',
   'safety.p1': '本工具僅供陸上放鬆與呼吸覺察練習使用。',
