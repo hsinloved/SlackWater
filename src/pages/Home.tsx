@@ -19,7 +19,7 @@ export function Home() {
           <h1 className="mt-3 text-2xl font-light tracking-[0.3em] text-ink">
             SLACKWATER
           </h1>
-          <p className="mt-1 font-heading text-base tracking-wide text-accent">
+          <p className="mt-1 text-sm tracking-wide text-accent">
             {t('home.tagline')}
           </p>
         </div>
@@ -34,7 +34,7 @@ export function Home() {
             className="glass group flex animate-fade-in items-center justify-between gap-4 rounded-3xl px-6 py-6 text-left transition active:scale-[0.99] hover:bg-white/[0.09]"
           >
             <span>
-              <span className="block text-xl font-medium text-ink">
+              <span className="block font-heading text-2xl font-semibold text-ink">
                 {t(`modes.${mode}.title`)}
               </span>
               <span className="mt-0.5 block text-sm text-ink-soft">
