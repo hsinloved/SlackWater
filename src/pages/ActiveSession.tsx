@@ -3,7 +3,6 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AppLayout } from '../components/AppLayout';
 import { BreathingCircle } from '../components/BreathingCircle';
 import { PhaseCue } from '../components/PhaseCue';
-import { SafetyBanner } from '../components/SafetyBanner';
 import { SessionControls } from '../components/SessionControls';
 import { TimerDisplay } from '../components/TimerDisplay';
 import { generateSessionPlan } from '../features/session/sessionEngine';
@@ -139,17 +138,16 @@ export function ActiveSession() {
       </div>
 
       <AppLayout>
-        <div className="flex items-center justify-between">
-          <SafetyBanner />
-          {step?.roundNumber && (
-            <span className="ml-3 shrink-0 text-sm text-white/70">
+        {step?.roundNumber && (
+          <div className="flex justify-center">
+            <span className="text-sm text-white/60">
               {t('active.round', {
                 n: step.roundNumber,
                 total: step.totalRounds ?? 1,
               })}
             </span>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* Stacked vertically: orb · countdown · cue */}
         <div className="flex flex-1 flex-col items-center justify-center gap-8 py-6">

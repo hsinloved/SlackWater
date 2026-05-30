@@ -31,7 +31,7 @@ const en: Record<string, string> = {
   'modes.rv-mobility.title': 'RV Mobility / Empty-Lung Stretch',
   'modes.rv-mobility.subtitle': 'Dry-land only · gentle mobility',
   'modes.rv-mobility.desc':
-    'A short, gentle empty-lung stretch for mobility — not a max-hold exercise. Never force the exhale.',
+    'A short, gentle empty-lung stretch for chest and diaphragm mobility — not a breath-hold exercise.',
 
   'setup.inhale': 'Inhale',
   'setup.exhale': 'Exhale',
@@ -47,7 +47,7 @@ const en: Record<string, string> = {
   'setup.longHoldWarning':
     "That's a long hold. There's no need to chase a big number — consistency and comfort matter more than duration. You can end any hold early.",
   'setup.rvWarning':
-    'Dry-land only. This is gentle mobility, not a max-hold exercise. Never force the exhale.',
+    'Dry-land only. Never force the exhale — keep it light and stop at the first hint of strain.',
   'setup.finalInhaleNote':
     'Final inhale cue: “Take a comfortable 70–80% inhale.”',
   'setup.estimate': 'Estimated duration: {duration}',
@@ -153,7 +153,7 @@ const zhTW: Record<string, string> = {
   'modes.rv-mobility.title': '殘氣量活動度 / 空肺伸展',
   'modes.rv-mobility.subtitle': '僅限陸上 · 和緩活動度',
   'modes.rv-mobility.desc':
-    '短暫、和緩的空肺伸展，用來增加活動度——不是極限閉氣練習。切勿勉強吐氣。',
+    '短暫、和緩的空肺伸展，增加胸腔與橫膈的活動度——不是閉氣練習。',
 
   'setup.inhale': '吸氣',
   'setup.exhale': '吐氣',
@@ -169,7 +169,7 @@ const zhTW: Record<string, string> = {
   'setup.longHoldWarning':
     '這是一段較長的閉氣。不需要追求數字——穩定與舒適比時間長短更重要。你隨時都可以提早結束。',
   'setup.rvWarning':
-    '僅限陸上。這是和緩的活動度練習，不是極限閉氣。切勿勉強吐氣。',
+    '僅限陸上。切勿勉強吐氣——保持輕鬆，一有緊繃或不適就停止。',
   'setup.finalInhaleNote': '最後吸氣提示：「舒適地吸到七到八成。」',
   'setup.estimate': '預估時間：{duration}',
 
