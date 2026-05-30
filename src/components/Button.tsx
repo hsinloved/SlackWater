@@ -27,7 +27,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
-      className={`inline-flex items-center justify-center rounded-2xl px-6 py-4 text-lg font-medium transition disabled:opacity-40 disabled:active:scale-100 ${VARIANT_CLASSES[variant]} ${className}`}
+      className={`inline-flex items-center justify-center rounded-2xl px-6 py-4 text-[17px] font-medium transition disabled:opacity-40 disabled:active:scale-100 ${VARIANT_CLASSES[variant]} ${className}`}
       {...rest}
     >
       {children}

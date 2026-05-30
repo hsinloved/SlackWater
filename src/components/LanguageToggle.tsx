@@ -18,7 +18,7 @@ export function LanguageToggle() {
             key={l.code}
             onClick={() => setLang(l.code)}
             aria-pressed={active}
-            className={`rounded-full px-3 py-1 text-sm font-medium transition ${
+            className={`whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium leading-none transition ${
               active
                 ? 'bg-accent text-[#06212a]'
                 : 'text-ink-soft hover:text-ink'

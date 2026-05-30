@@ -19,17 +19,14 @@ export function Home() {
 
   return (
     <AppLayout>
-      <header className="mb-8 mt-2 flex animate-fade-in items-start justify-between gap-4">
-        <div>
-          <LogoMark className="h-11 w-auto text-accent" />
-          <h1 className="mt-3 text-2xl font-light tracking-[0.3em] text-ink">
-            SLACKWATER
-          </h1>
-          <p className="mt-1 text-sm tracking-wide text-accent">
-            {t('home.tagline')}
-          </p>
-        </div>
-        <LanguageToggle />
+      <header className="mb-7 mt-2 flex animate-fade-in flex-col items-center text-center">
+        <LogoMark className="h-11 w-auto text-accent" />
+        <h1 className="mt-3 pl-[0.3em] text-2xl font-light tracking-[0.3em] text-ink">
+          SLACKWATER
+        </h1>
+        <p className="mt-1 text-sm tracking-wide text-accent">
+          {t('home.tagline')}
+        </p>
       </header>
 
       <StreakRow />
@@ -39,10 +36,10 @@ export function Home() {
           <button
             key={mode}
             onClick={() => navigate(`/setup/${mode}`)}
-            className="glass group flex animate-fade-in items-center justify-between gap-4 rounded-3xl px-6 py-6 text-left transition active:scale-[0.99] hover:bg-white/[0.09]"
+            className="glass group flex animate-fade-in items-center justify-between gap-4 rounded-3xl px-6 py-5 text-left transition active:scale-[0.99] hover:bg-white/[0.09]"
           >
             <span>
-              <span className="block font-heading text-2xl font-semibold text-ink">
+              <span className="block font-heading text-xl font-semibold text-ink">
                 {t(`modes.${mode}.title`)}
               </span>
               <span className="mt-0.5 block text-sm text-ink-soft">
@@ -72,7 +69,7 @@ export function Home() {
         className="glass group mt-3 flex items-center justify-between gap-4 rounded-3xl px-6 py-5 transition active:scale-[0.99] hover:bg-white/[0.09]"
       >
         <span>
-          <span className="block font-heading text-2xl font-semibold text-ink">
+          <span className="block font-heading text-xl font-semibold text-ink">
             {t('home.learnTitle')}
           </span>
           <span className="mt-0.5 block text-sm text-ink-soft">
@@ -96,12 +93,31 @@ export function Home() {
       </Link>
 
       <div className="mt-auto flex flex-col items-center gap-4 pt-10">
-        <Link
-          to="/history"
-          className="text-base font-medium text-accent underline-offset-4 hover:underline"
-        >
-          {t('home.history')}
-        </Link>
+        <div className="glass flex w-full items-center justify-between gap-2 rounded-full p-1.5">
+          <Link
+            to="/history"
+            className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-ink transition active:scale-[0.98] hover:bg-white/[0.06]"
+          >
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
+              <path
+                d="M12 7.5V12l3 1.8"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            {t('home.history')}
+          </Link>
+          <LanguageToggle />
+        </div>
         <p className="text-center text-xs leading-relaxed text-ink-soft">
           {t('home.safety')}
         </p>
