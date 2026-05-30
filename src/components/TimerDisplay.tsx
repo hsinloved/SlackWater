@@ -7,16 +7,12 @@ interface TimerDisplayProps {
 export function TimerDisplay({ seconds }: TimerDisplayProps) {
   return (
     <div
-      className="font-extralight tabular-nums tracking-tight text-white/85"
-      style={{
-        fontSize: 'clamp(2.75rem, 13vw, 4rem)',
-        lineHeight: 1,
-        textShadow: '0 2px 22px rgba(8,40,50,0.45)',
-      }}
+      className="font-thin tabular-nums tracking-tight text-white/25"
+      style={{ fontSize: 'clamp(5rem, 28vw, 9rem)', lineHeight: 1 }}
       aria-live="polite"
     >
-      {/* Keyed so each value gently fades/scales in instead of snapping */}
-      <span key={seconds} className="inline-block animate-tick">
+      {/* Large, faint watermark number that gently cross-fades each second */}
+      <span key={seconds} className="inline-block animate-fade-slow">
         {formatClock(seconds)}
       </span>
     </div>

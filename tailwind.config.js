@@ -52,6 +52,7 @@ export default {
         'spin-slower': 'spin-slow 38s linear infinite reverse',
         tick: 'tick 0.45s cubic-bezier(0.22, 1, 0.36, 1)',
         fade: 'fade 0.6s ease-out both',
+        'fade-slow': 'fade 0.9s ease-in-out both',
       },
     },
   },
