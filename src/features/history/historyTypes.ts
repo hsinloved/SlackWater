@@ -9,6 +9,11 @@ export const FEELINGS: Feeling[] = [
   'uncomfortable',
 ];
 
+/** Body-awareness self-rating (the "real metric", not seconds). */
+export type Scale = 'yes' | 'somewhat' | 'no';
+
+export const SCALES: Scale[] = ['yes', 'somewhat', 'no'];
+
 export interface SessionRecord {
   id: string;
   /** ISO timestamp of when the session was saved. */
@@ -22,4 +27,7 @@ export interface SessionRecord {
   perceivedEffort: number | null; // 1–5
   breathHoldSeconds: number | null;
   notes: string;
+  // Body-awareness reflection (optional; absent on older records)
+  bodyQuieter?: Scale | null;
+  relaxedAtUrge?: Scale | null;
 }

@@ -59,6 +59,34 @@ export function Home() {
         ))}
       </div>
 
+      <Link
+        to="/learn"
+        className="glass group mt-3 flex items-center justify-between gap-4 rounded-3xl px-6 py-5 transition active:scale-[0.99] hover:bg-white/[0.09]"
+      >
+        <span>
+          <span className="block font-heading text-lg font-semibold text-ink">
+            {t('home.learnTitle')}
+          </span>
+          <span className="mt-0.5 block text-sm text-ink-soft">
+            {t('home.learnDesc')}
+          </span>
+        </span>
+        <span
+          aria-hidden="true"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent transition group-hover:bg-accent group-hover:text-[#06212a]"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M9 6l6 6-6 6"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      </Link>
+
       <div className="mt-auto flex flex-col items-center gap-4 pt-10">
         <Link
           to="/history"

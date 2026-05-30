@@ -3,7 +3,12 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AppLayout } from '../components/AppLayout';
 import { Button } from '../components/Button';
 import { appendSession } from '../features/history/historyStorage';
-import { FEELINGS, type Feeling } from '../features/history/historyTypes';
+import {
+  FEELINGS,
+  SCALES,
+  type Feeling,
+  type Scale,
+} from '../features/history/historyTypes';
 import type { SessionMode } from '../features/session/sessionTypes';
 import type { SessionSummary } from '../features/session/useSessionTimer';
 import { useLanguage } from '../i18n/LanguageProvider';
@@ -22,8 +27,37 @@ export function Complete() {
 
   const [feeling, setFeeling] = useState<Feeling | null>(null);
   const [effort, setEffort] = useState<number | null>(null);
+  const [bodyQuieter, setBodyQuieter] = useState<Scale | null>(null);
+  const [relaxedAtUrge, setRelaxedAtUrge] = useState<Scale | null>(null);
   const [holdInput, setHoldInput] = useState('');
   const [notes, setNotes] = useState('');
+
+  const renderScale = (
+    question: string,
+    value: Scale | null,
+    onSet: (v: Scale | null) => void,
+  ) => (
+    <div>
+      <h2 className="mb-2 font-heading text-lg font-medium text-ink">
+        {question}
+      </h2>
+      <div className="flex gap-2">
+        {SCALES.map((s) => (
+          <button
+            key={s}
+            onClick={() => onSet(value === s ? null : s)}
+            className={`h-11 flex-1 rounded-2xl text-sm transition ${
+              value === s
+                ? 'bg-accent font-medium text-[#06212a]'
+                : 'glass text-ink'
+            }`}
+          >
+            {t(`scale.${s}`)}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 
   if (!state?.summary || !state.mode) {
     return <Navigate to="/" replace />;
@@ -42,6 +76,8 @@ export function Complete() {
       totalRounds: summary.totalRounds,
       feeling,
       perceivedEffort: effort,
+      bodyQuieter,
+      relaxedAtUrge,
       breathHoldSeconds:
         parsedHold != null && !Number.isNaN(parsedHold)
           ? parsedHold
@@ -109,6 +145,13 @@ export function Complete() {
             ))}
           </div>
         </div>
+
+        {renderScale(t('complete.bodyQuieterQ'), bodyQuieter, setBodyQuieter)}
+        {renderScale(
+          t('complete.relaxedAtUrgeQ'),
+          relaxedAtUrge,
+          setRelaxedAtUrge,
+        )}
 
         <div>
           <label

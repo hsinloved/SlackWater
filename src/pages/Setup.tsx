@@ -20,6 +20,13 @@ import { formatDuration } from '../utils/format';
 
 const VALID_MODES: SessionMode[] = ['relaxed', 'static-hold', 'rv-mobility'];
 
+/** Primary lesson to deep-link from each mode's setup screen. */
+const LEARN_FOR: Record<SessionMode, string> = {
+  relaxed: 'comfortable-breath',
+  'static-hold': 'co2-tolerance',
+  'rv-mobility': 'rv-explained',
+};
+
 function isValidMode(mode: string | undefined): mode is SessionMode {
   return !!mode && VALID_MODES.includes(mode as SessionMode);
 }
@@ -59,9 +66,15 @@ export function Setup() {
       <h1 className="font-heading text-3xl font-semibold text-ink">
         {t(`modes.${config.mode}.title`)}
       </h1>
-      <p className="mt-1 mb-5 text-sm text-ink-soft">
+      <p className="mt-1 text-sm text-ink-soft">
         {t(`modes.${config.mode}.desc`)}
       </p>
+      <Link
+        to={`/learn/${LEARN_FOR[config.mode]}`}
+        className="mb-5 mt-2 inline-block text-sm font-medium text-accent hover:underline"
+      >
+        {t('setup.learnMore')}
+      </Link>
 
       <div className="flex flex-col gap-3">
         {config.mode === 'relaxed' && (

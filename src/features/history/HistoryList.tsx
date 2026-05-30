@@ -41,6 +41,16 @@ export function HistoryList({ records }: HistoryListProps) {
             {r.breathHoldSeconds != null && (
               <span>{t('history.holdUnit', { n: r.breathHoldSeconds })}</span>
             )}
+            {r.bodyQuieter && (
+              <span>
+                {t('history.quieter')}: {t(`scale.${r.bodyQuieter}`)}
+              </span>
+            )}
+            {r.relaxedAtUrge && (
+              <span>
+                {t('history.relaxed')}: {t(`scale.${r.relaxedAtUrge}`)}
+              </span>
+            )}
           </div>
           {r.notes && (
             <p className="mt-2 text-sm leading-relaxed text-ink">{r.notes}</p>

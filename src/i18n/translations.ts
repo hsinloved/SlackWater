@@ -121,6 +121,27 @@ const en: Record<string, string> = {
   'history.roundsUnit': 'rounds',
   'history.effortUnit': 'effort {n}/5',
   'history.holdUnit': 'hold {n}s',
+  'history.quieter': 'Quieter',
+  'history.relaxed': 'Relaxed',
+
+  'nav.learn': 'Learn',
+  'home.learnTitle': 'Learn the basics',
+  'home.learnDesc': 'Breathe better, dive calmer.',
+  'learn.title': 'Learn',
+  'learn.disclaimer':
+    'Educational only — not medical advice, and not a substitute for a certified freediving instructor.',
+  'setup.learnMore': 'Learn more →',
+  'complete.bodyQuieterQ': 'Did your body get quieter?',
+  'complete.relaxedAtUrgeQ': 'Relaxed at the first urge to breathe?',
+  'scale.yes': 'Yes',
+  'scale.somewhat': 'Somewhat',
+  'scale.no': 'No',
+  'intro.title': 'Welcome to Slack Water',
+  'intro.p1':
+    'Calm, dry-land breath training for freediving — built around relaxation and body awareness, not chasing numbers.',
+  'intro.p2':
+    'Consistency over intensity. The goal is a quieter body and an easier breath, not a personal best.',
+  'intro.continue': 'Continue',
 
   'safety.title': 'Before you begin',
   'safety.p1':
@@ -238,6 +259,27 @@ const zhTW: Record<string, string> = {
   'history.roundsUnit': '回合',
   'history.effortUnit': '費力 {n}/5',
   'history.holdUnit': '閉氣 {n}秒',
+  'history.quieter': '安靜',
+  'history.relaxed': '放鬆',
+
+  'nav.learn': '學習',
+  'home.learnTitle': '認識基礎',
+  'home.learnDesc': '呼吸更好，下潛更從容。',
+  'learn.title': '學習',
+  'learn.disclaimer':
+    '僅供教育參考——不是醫療建議，也無法取代合格的自由潛水教練。',
+  'setup.learnMore': '了解更多 →',
+  'complete.bodyQuieterQ': '身體有變得更安靜嗎？',
+  'complete.relaxedAtUrgeQ': '想呼吸時能保持放鬆嗎？',
+  'scale.yes': '有',
+  'scale.somewhat': '還好',
+  'scale.no': '沒有',
+  'intro.title': '歡迎使用 Slack Water',
+  'intro.p1':
+    '為自由潛水設計的陸上呼吸練習——重點在放鬆與身體覺察，而不是追求數字。',
+  'intro.p2':
+    '穩定勝過強度。目標是更安靜的身體與更輕鬆的呼吸，不是個人紀錄。',
+  'intro.continue': '繼續',
 
   'safety.title': '開始之前',
   'safety.p1': '本工具僅供陸上放鬆與呼吸覺察練習使用。',
