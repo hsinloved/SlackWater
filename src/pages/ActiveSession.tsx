@@ -116,13 +116,13 @@ export function ActiveSession() {
 
   return (
     <>
-      {/* Immersive ambient backdrop: deep ocean with a breathing central glow */}
+      {/* Immersive ambient backdrop: deep blue ocean with a breathing glow */}
       <div
         className="fixed inset-0"
         style={{
           zIndex: -1,
           background:
-            'linear-gradient(180deg, #0c333d 0%, #061d26 60%, #03141a 100%)',
+            'linear-gradient(180deg, #0e2940 0%, #08182a 58%, #030b14 100%)',
         }}
       >
         <div
@@ -133,7 +133,7 @@ export function ActiveSession() {
             transitionDuration: `${ambientDuration}s`,
             transitionTimingFunction: 'cubic-bezier(0.37, 0, 0.63, 1)',
             background:
-              'radial-gradient(circle at 50% 44%, rgba(150,228,230,0.5) 0%, rgba(40,140,155,0.16) 34%, rgba(40,140,155,0) 62%)',
+              'radial-gradient(circle at 50% 42%, rgba(125,185,235,0.45) 0%, rgba(60,115,185,0.15) 34%, rgba(60,115,185,0) 62%)',
           }}
         />
       </div>
@@ -151,14 +151,15 @@ export function ActiveSession() {
           )}
         </div>
 
-        <div className="flex flex-1 flex-col items-center justify-center gap-10 py-6">
+        {/* Stacked vertically: orb · countdown · cue */}
+        <div className="flex flex-1 flex-col items-center justify-center gap-8 py-6">
           <BreathingCircle
             phase={step?.phase ?? 'rest'}
             durationSeconds={step?.durationSeconds ?? 0}
             videoSrc={VIDEO_SRC}
-          >
-            <TimerDisplay seconds={timer.remainingSeconds} />
-          </BreathingCircle>
+          />
+
+          <TimerDisplay seconds={timer.remainingSeconds} />
 
           {step && (
             <PhaseCue label={t(step.labelKey)} cueText={t(step.cueKey)} />

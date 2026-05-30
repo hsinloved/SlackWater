@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties } from 'react';
 import type { SessionPhase } from '../features/session/sessionTypes';
 
 interface BreathingCircleProps {
@@ -7,7 +7,6 @@ interface BreathingCircleProps {
   durationSeconds: number;
   /** Source URL of the looping breathing-orb video. */
   videoSrc: string;
-  children: ReactNode;
 }
 
 /** Target scale of the orb per phase: expanded on inhale, soft on empty. */
@@ -35,13 +34,10 @@ export function BreathingCircle({
   phase,
   durationSeconds,
   videoSrc,
-  children,
 }: BreathingCircleProps) {
   const scale = targetScale(phase);
 
   // Long, soft easing so the orb breathes rather than snaps (diffuse feel).
-  // NB: transforms live on each layer (not a shared wrapper) so the video's
-  // `screen` blend keeps compositing against the page backdrop — no isolation.
   const transition = {
     transitionProperty: 'transform',
     transitionDuration: `${durationSeconds}s`,
@@ -51,17 +47,15 @@ export function BreathingCircle({
   const orbStyle: CSSProperties = {
     width: ORB,
     height: ORB,
-    // `screen` turns the video's black background transparent, so the orb melts
-    // into the dark backdrop with no hard circular edge.
+    // `screen` turns the video's black background transparent where supported.
     mixBlendMode: 'screen',
     // closest-side keeps the fade well inside the square, so the edge is a
-    // clean circle that melts away — no square/rounded-square frame, even if
-    // the browser ignores `screen` for the video layer.
+    // clean circle that melts away — no square frame.
     maskImage:
       'radial-gradient(circle closest-side, #000 0 48%, rgba(0,0,0,0) 66%)',
     WebkitMaskImage:
       'radial-gradient(circle closest-side, #000 0 48%, rgba(0,0,0,0) 66%)',
-    filter: 'saturate(0.85) brightness(1.14) contrast(1.04) hue-rotate(-8deg)',
+    filter: 'saturate(0.78) brightness(1.12) contrast(1.03)',
     transform: `scale(${scale})`,
     ...transition,
   };
@@ -70,7 +64,7 @@ export function BreathingCircle({
     width: SIZE,
     height: SIZE,
     background:
-      'radial-gradient(circle, rgba(110,205,210,0.4) 0%, rgba(31,128,141,0.16) 45%, rgba(31,128,141,0) 70%)',
+      'radial-gradient(circle, rgba(120,180,235,0.42) 0%, rgba(60,110,180,0.16) 45%, rgba(60,110,180,0) 70%)',
     filter: 'blur(30px)',
     transform: `scale(${scale * 1.12})`,
     ...transition,
@@ -84,15 +78,7 @@ export function BreathingCircle({
       {/* Soft bloom behind the orb for depth (gentle parallax + glow) */}
       <div className="absolute rounded-full animate-glow" style={glowStyle} />
 
-      {/* Countdown watermark — sits BEHIND the orb and slightly above centre */}
-      <div
-        className="absolute inset-0 flex items-center justify-center"
-        style={{ transform: 'translateY(-20px)' }}
-      >
-        {children}
-      </div>
-
-      {/* The breathing orb — your video, black blended away via `screen` */}
+      {/* The breathing orb — your video, black blended/feathered away */}
       <video
         className="absolute inset-0 m-auto"
         style={orbStyle}
