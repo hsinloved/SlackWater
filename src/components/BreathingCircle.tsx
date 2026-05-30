@@ -70,9 +70,9 @@ export function BreathingCircle({
     width: SIZE,
     height: SIZE,
     background:
-      'radial-gradient(circle, rgba(125,220,225,0.6) 0%, rgba(45,155,170,0.28) 42%, rgba(45,155,170,0) 70%)',
-    filter: 'blur(32px)',
-    transform: `scale(${scale * 1.16})`,
+      'radial-gradient(circle, rgba(110,205,210,0.4) 0%, rgba(31,128,141,0.16) 45%, rgba(31,128,141,0) 70%)',
+    filter: 'blur(30px)',
+    transform: `scale(${scale * 1.12})`,
     ...transition,
   };
 
@@ -84,6 +84,14 @@ export function BreathingCircle({
       {/* Soft bloom behind the orb for depth (gentle parallax + glow) */}
       <div className="absolute rounded-full animate-glow" style={glowStyle} />
 
+      {/* Countdown watermark — sits BEHIND the orb and slightly above centre */}
+      <div
+        className="absolute inset-0 flex items-center justify-center"
+        style={{ transform: 'translateY(-20px)' }}
+      >
+        {children}
+      </div>
+
       {/* The breathing orb — your video, black blended away via `screen` */}
       <video
         className="absolute inset-0 m-auto"
@@ -94,10 +102,6 @@ export function BreathingCircle({
         muted
         playsInline
       />
-
-      <div className="relative flex flex-col items-center justify-center text-center">
-        {children}
-      </div>
     </div>
   );
 }
