@@ -1,10 +1,12 @@
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { AppLayout } from '../components/AppLayout';
+import { Button } from '../components/Button';
 import { getLesson, pickText } from '../features/learn/lessons';
 import { useLanguage } from '../i18n/LanguageProvider';
 
 export function LearnLesson() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { t, lang } = useLanguage();
   const lesson = getLesson(id);
 
@@ -61,6 +63,17 @@ export function LearnLesson() {
           );
         })}
       </div>
+
+      {lesson.practice && (
+        <Button
+          className="mt-2 w-full"
+          onClick={() =>
+            navigate('/session', { state: { config: lesson.practice } })
+          }
+        >
+          {t('learn.startPractice')}
+        </Button>
+      )}
     </AppLayout>
   );
 }

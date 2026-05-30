@@ -1,4 +1,5 @@
 import type { Lang } from '../../i18n/translations';
+import type { SessionConfig } from '../session/sessionTypes';
 
 export interface Localized {
   en: string;
@@ -15,7 +16,37 @@ export interface Lesson {
   title: Localized;
   summary: Localized;
   blocks: LessonBlock[];
+  /** Optional one-tap practice this lesson recommends. */
+  practice?: SessionConfig;
 }
+
+// Gentle, ready-to-run templates a lesson can launch directly.
+const RELAXED_PRACTICE: SessionConfig = {
+  mode: 'relaxed',
+  inhaleSeconds: 4,
+  exhaleSeconds: 6,
+  cycles: 10,
+  holdAfterInhaleSeconds: 0,
+  holdAfterExhaleSeconds: 0,
+};
+const STATIC_PRACTICE: SessionConfig = {
+  mode: 'static-hold',
+  prepCycles: 5,
+  inhaleSeconds: 4,
+  exhaleSeconds: 6,
+  breathHoldSeconds: 30,
+  recoveryCycles: 3,
+  rounds: 4,
+};
+const RV_PRACTICE: SessionConfig = {
+  mode: 'rv-mobility',
+  prepCycles: 5,
+  inhaleSeconds: 4,
+  exhaleSeconds: 6,
+  emptyLungStretchSeconds: 4,
+  recoverySeconds: 30,
+  rounds: 4,
+};
 
 /** Pick the string for the active language, falling back to English. */
 export function pickText(text: Localized, lang: Lang): string {
@@ -39,6 +70,7 @@ const callout = (
 export const LESSONS: Lesson[] = [
   {
     id: 'comfortable-breath',
+    practice: RELAXED_PRACTICE,
     title: {
       en: 'The comfortable full breath',
       'zh-TW': '舒服的滿，不是最大容量',
@@ -69,6 +101,7 @@ export const LESSONS: Lesson[] = [
   },
   {
     id: 'co2-tolerance',
+    practice: STATIC_PRACTICE,
     title: {
       en: 'Longer holds come from CO₂ tolerance',
       'zh-TW': '憋得久，靠的是 CO₂ 耐受',
@@ -99,6 +132,7 @@ export const LESSONS: Lesson[] = [
   },
   {
     id: 'dry-land-routine',
+    practice: STATIC_PRACTICE,
     title: {
       en: 'A gentle dry-land hold',
       'zh-TW': '陸地溫和憋氣練法',
@@ -180,6 +214,7 @@ export const LESSONS: Lesson[] = [
   },
   {
     id: 'belly-vs-chest',
+    practice: RELAXED_PRACTICE,
     title: {
       en: 'Breathing "into the belly" vs the chest',
       'zh-TW': '吸到肚子 vs 吸到胸口',
@@ -233,6 +268,7 @@ export const LESSONS: Lesson[] = [
   },
   {
     id: 'rv-mobility-howto',
+    practice: RV_PRACTICE,
     title: { en: 'A gentle empty-lung stretch', 'zh-TW': '溫和的空肺伸展做法' },
     summary: {
       en: 'Open the diaphragm — stretch sensation only, never strain.',
@@ -270,6 +306,7 @@ export const LESSONS: Lesson[] = [
   },
   {
     id: 'weekly-plan',
+    practice: RELAXED_PRACTICE,
     title: { en: 'A simple weekly routine', 'zh-TW': '一週簡單的陸地練習' },
     summary: {
       en: '3–4×/week, 10–15 minutes — calm and consistent.',

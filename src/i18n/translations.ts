@@ -130,6 +130,7 @@ const en: Record<string, string> = {
   'learn.title': 'Learn',
   'learn.disclaimer':
     'Educational only — not medical advice, and not a substitute for a certified freediving instructor.',
+  'learn.startPractice': 'Start this practice →',
   'setup.learnMore': 'Learn more →',
   'complete.bodyQuieterQ': 'Did your body get quieter?',
   'complete.relaxedAtUrgeQ': 'Relaxed at the first urge to breathe?',
@@ -268,6 +269,7 @@ const zhTW: Record<string, string> = {
   'learn.title': '學習',
   'learn.disclaimer':
     '僅供教育參考——不是醫療建議，也無法取代合格的自由潛水教練。',
+  'learn.startPractice': '開始這個練習 →',
   'setup.learnMore': '了解更多 →',
   'complete.bodyQuieterQ': '身體有變得更安靜嗎？',
   'complete.relaxedAtUrgeQ': '想呼吸時能保持放鬆嗎？',

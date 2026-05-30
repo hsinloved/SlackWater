@@ -64,7 +64,7 @@ export function Home() {
         className="glass group mt-3 flex items-center justify-between gap-4 rounded-3xl px-6 py-5 transition active:scale-[0.99] hover:bg-white/[0.09]"
       >
         <span>
-          <span className="block font-heading text-lg font-semibold text-ink">
+          <span className="block font-heading text-2xl font-semibold text-ink">
             {t('home.learnTitle')}
           </span>
           <span className="mt-0.5 block text-sm text-ink-soft">
