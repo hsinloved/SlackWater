@@ -39,6 +39,8 @@ export interface DayDot {
   key: string;
   practised: boolean;
   isToday: boolean;
+  /** Day of week, 0 = Sunday … 6 = Saturday. */
+  weekday: number;
 }
 
 /** The last 7 days, oldest → today, for a dots row. */
@@ -50,7 +52,12 @@ export function last7Days(): DayDot[] {
     const d = new Date();
     d.setDate(d.getDate() - i);
     const key = dayKey(d);
-    out.push({ key, practised: set.has(key), isToday: key === today });
+    out.push({
+      key,
+      practised: set.has(key),
+      isToday: key === today,
+      weekday: d.getDay(),
+    });
   }
   return out;
 }
