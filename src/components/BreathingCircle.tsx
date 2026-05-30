@@ -58,9 +58,9 @@ export function BreathingCircle({
     // clean circle that melts away — no square/rounded-square frame, even if
     // the browser ignores `screen` for the video layer.
     maskImage:
-      'radial-gradient(circle closest-side, #000 0 54%, rgba(0,0,0,0) 78%)',
+      'radial-gradient(circle closest-side, #000 0 48%, rgba(0,0,0,0) 66%)',
     WebkitMaskImage:
-      'radial-gradient(circle closest-side, #000 0 54%, rgba(0,0,0,0) 78%)',
+      'radial-gradient(circle closest-side, #000 0 48%, rgba(0,0,0,0) 66%)',
     filter: 'saturate(0.85) brightness(1.14) contrast(1.04) hue-rotate(-8deg)',
     transform: `scale(${scale})`,
     ...transition,
@@ -81,21 +81,6 @@ export function BreathingCircle({
       className="relative flex items-center justify-center"
       style={{ width: SIZE, height: SIZE }}
     >
-      {/* Glass lens frame around the orb */}
-      <div
-        className="absolute rounded-full"
-        style={{
-          width: 288,
-          height: 288,
-          background: 'rgba(255,255,255,0.04)',
-          backdropFilter: 'blur(5px)',
-          WebkitBackdropFilter: 'blur(5px)',
-          border: '1px solid rgba(255,255,255,0.10)',
-          boxShadow:
-            'inset 0 1px 14px rgba(255,255,255,0.12), inset 0 -10px 34px rgba(0,0,0,0.28)',
-        }}
-      />
-
       {/* Soft bloom behind the orb for depth (gentle parallax + glow) */}
       <div className="absolute rounded-full animate-glow" style={glowStyle} />
 
