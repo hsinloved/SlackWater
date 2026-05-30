@@ -15,7 +15,12 @@ function targetScale(phase: SessionPhase): number {
     case 'preparation-inhale':
     case 'final-inhale':
     case 'breath-hold':
+    case 'inhale-chest':
       return 1;
+    case 'inhale-ribs':
+      return 0.85;
+    case 'inhale-belly':
+      return 0.7;
     case 'preparation-exhale':
     case 'empty-lung-stretch':
       return 0.62;

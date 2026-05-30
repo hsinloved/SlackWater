@@ -8,6 +8,7 @@ import type {
   RelaxedConfig,
   RvMobilityConfig,
   StaticHoldConfig,
+  ThreePartConfig,
 } from './sessionTypes';
 
 const relaxed = (over: Partial<RelaxedConfig> = {}): RelaxedConfig => ({
@@ -57,6 +58,26 @@ describe('generateSessionPlan — relaxed', () => {
       relaxed({ cycles: 2, holdAfterInhaleSeconds: 3, holdAfterExhaleSeconds: 2 }),
     );
     expect(plan.filter((s) => s.phase === 'breath-hold')).toHaveLength(4);
+  });
+});
+
+const threePart = (over: Partial<ThreePartConfig> = {}): ThreePartConfig => ({
+  mode: 'three-part',
+  stageSeconds: 2,
+  exhaleSeconds: 6,
+  cycles: 8,
+  ...over,
+});
+
+describe('generateSessionPlan — three-part', () => {
+  it('produces belly/ribs/chest/exhale per cycle and no breath-hold', () => {
+    const plan = generateSessionPlan(threePart({ cycles: 3 }));
+    expect(plan).toHaveLength(3 * 4 + 1);
+    expect(plan.some((s) => s.allowEarlyExit)).toBe(false);
+    expect(plan.filter((s) => s.phase === 'inhale-belly')).toHaveLength(3);
+    expect(plan.filter((s) => s.phase === 'inhale-ribs')).toHaveLength(3);
+    expect(plan.filter((s) => s.phase === 'inhale-chest')).toHaveLength(3);
+    expect(plan[plan.length - 1]?.phase).toBe('complete');
   });
 });
 

@@ -24,6 +24,10 @@ const en: Record<string, string> = {
   'modes.relaxed.subtitle': 'Guided inhale / exhale rhythm',
   'modes.relaxed.desc':
     'A gentle rhythm to settle the body. No breath-hold — just slow, even breathing.',
+  'modes.three-part.title': 'Three-Part Breath',
+  'modes.three-part.subtitle': 'Belly → ribs → upper chest',
+  'modes.three-part.desc':
+    'A gentle staged inhale that trains low, diaphragmatic breathing — fill belly, then ribs, then a little upper chest, to about 75–80% and stay soft.',
   'modes.static-hold.title': 'Gentle Static Hold',
   'modes.static-hold.subtitle': 'Preparation, comfortable hold, recovery',
   'modes.static-hold.desc':
@@ -35,6 +39,7 @@ const en: Record<string, string> = {
 
   'setup.inhale': 'Inhale',
   'setup.exhale': 'Exhale',
+  'setup.stageDuration': 'Each stage',
   'setup.holdAfterInhale': 'Hold after inhale',
   'setup.holdAfterExhale': 'Hold after exhale',
   'setup.cycles': 'Cycles',
@@ -68,6 +73,9 @@ const en: Record<string, string> = {
 
   'phase.inhale': 'Inhale',
   'phase.exhale': 'Exhale',
+  'phase.belly': 'Belly',
+  'phase.ribs': 'Ribs',
+  'phase.chest': 'Upper chest',
   'phase.holdInhale': 'Hold',
   'phase.holdExhale': 'Hold (empty)',
   'phase.finalInhale': 'Final inhale',
@@ -80,6 +88,9 @@ const en: Record<string, string> = {
 
   'cue.inhale': 'Take a comfortable inhale. Let the belly rise first.',
   'cue.exhale': 'Slow, relaxed exhale. Let the shoulders drop.',
+  'cue.belly': 'Let the belly rise first — breathe low.',
+  'cue.ribs': 'Now let the side ribs widen.',
+  'cue.chest': 'A little into the upper chest — no raised shoulders.',
   'cue.holdAfterInhale': 'Hold gently. Stay soft.',
   'cue.holdAfterExhale': 'Rest at empty. No tension.',
   'cue.finalInhale':
@@ -168,6 +179,10 @@ const zhTW: Record<string, string> = {
   'modes.relaxed.title': '放鬆呼吸',
   'modes.relaxed.subtitle': '引導吸氣 / 吐氣節奏',
   'modes.relaxed.desc': '以和緩的節奏安定身體。不閉氣——只是緩慢、平穩地呼吸。',
+  'modes.three-part.title': '三段式呼吸',
+  'modes.three-part.subtitle': '肚子 → 側肋 → 上胸',
+  'modes.three-part.desc':
+    '和緩的分段吸氣，練習由下往上、用橫膈膜呼吸——先肚子、再肋骨、最後上胸補一點點，吸到約 75–80%，身體保持放鬆。',
   'modes.static-hold.title': '和緩靜態閉氣',
   'modes.static-hold.subtitle': '準備、舒適閉氣、恢復',
   'modes.static-hold.desc':
@@ -179,6 +194,7 @@ const zhTW: Record<string, string> = {
 
   'setup.inhale': '吸氣',
   'setup.exhale': '吐氣',
+  'setup.stageDuration': '每段',
   'setup.holdAfterInhale': '吸氣後閉氣',
   'setup.holdAfterExhale': '吐氣後閉氣',
   'setup.cycles': '循環次數',
@@ -211,6 +227,9 @@ const zhTW: Record<string, string> = {
 
   'phase.inhale': '吸氣',
   'phase.exhale': '吐氣',
+  'phase.belly': '肚子',
+  'phase.ribs': '肋骨',
+  'phase.chest': '上胸',
   'phase.holdInhale': '閉氣',
   'phase.holdExhale': '閉氣（空肺）',
   'phase.finalInhale': '最後吸氣',
@@ -223,6 +242,9 @@ const zhTW: Record<string, string> = {
 
   'cue.inhale': '舒適地吸氣，先讓腹部隆起。',
   'cue.exhale': '緩慢、放鬆地吐氣，讓肩膀沉下。',
+  'cue.belly': '先讓腹部隆起——往下吸。',
+  'cue.ribs': '接著讓側肋往兩側打開。',
+  'cue.chest': '最後上胸補一點點——不要聳肩。',
   'cue.holdAfterInhale': '輕鬆地閉氣，保持柔軟。',
   'cue.holdAfterExhale': '停在空肺狀態，不要緊繃。',
   'cue.finalInhale': '舒適地吸到七到八成，不要吸到最滿。',

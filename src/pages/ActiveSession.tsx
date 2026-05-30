@@ -36,7 +36,12 @@ function targetBrightness(phase: SessionPhase | undefined): number {
   switch (phase) {
     case 'preparation-inhale':
     case 'final-inhale':
+    case 'inhale-chest':
       return 1;
+    case 'inhale-ribs':
+      return 0.85;
+    case 'inhale-belly':
+      return 0.7;
     case 'preparation-exhale':
     case 'empty-lung-stretch':
       return 0.45;

@@ -5,6 +5,7 @@ import type {
   SessionConfig,
   SessionPhaseStep,
   StaticHoldConfig,
+  ThreePartConfig,
 } from './sessionTypes';
 
 /**
@@ -68,6 +69,40 @@ function relaxedPlan(config: RelaxedConfig): SessionPhaseStep[] {
         audioCue: 'chime',
       });
     }
+  }
+  steps.push(completeStep());
+  return steps;
+}
+
+function threePartPlan(config: ThreePartConfig): SessionPhaseStep[] {
+  const steps: SessionPhaseStep[] = [];
+  for (let i = 0; i < config.cycles; i += 1) {
+    steps.push({
+      phase: 'inhale-belly',
+      durationSeconds: config.stageSeconds,
+      labelKey: 'phase.belly',
+      cueKey: 'cue.belly',
+      audioCue: 'bell',
+    });
+    steps.push({
+      phase: 'inhale-ribs',
+      durationSeconds: config.stageSeconds,
+      labelKey: 'phase.ribs',
+      cueKey: 'cue.ribs',
+    });
+    steps.push({
+      phase: 'inhale-chest',
+      durationSeconds: config.stageSeconds,
+      labelKey: 'phase.chest',
+      cueKey: 'cue.chest',
+    });
+    steps.push({
+      phase: 'preparation-exhale',
+      durationSeconds: config.exhaleSeconds,
+      labelKey: 'phase.exhale',
+      cueKey: 'cue.exhale',
+      audioCue: 'low',
+    });
   }
   steps.push(completeStep());
   return steps;
@@ -196,6 +231,8 @@ export function generateSessionPlan(
   switch (config.mode) {
     case 'relaxed':
       return relaxedPlan(config);
+    case 'three-part':
+      return threePartPlan(config);
     case 'static-hold':
       return staticHoldPlan(config);
     case 'rv-mobility':

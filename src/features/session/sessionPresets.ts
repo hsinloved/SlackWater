@@ -4,6 +4,7 @@ import type {
   SessionConfig,
   SessionMode,
   StaticHoldConfig,
+  ThreePartConfig,
 } from './sessionTypes';
 
 export const DEFAULT_RELAXED: RelaxedConfig = {
@@ -13,6 +14,13 @@ export const DEFAULT_RELAXED: RelaxedConfig = {
   cycles: 10,
   holdAfterInhaleSeconds: 0,
   holdAfterExhaleSeconds: 0,
+};
+
+export const DEFAULT_THREE_PART: ThreePartConfig = {
+  mode: 'three-part',
+  stageSeconds: 2,
+  exhaleSeconds: 6,
+  cycles: 8,
 };
 
 export const DEFAULT_STATIC_HOLD: StaticHoldConfig = {
@@ -39,6 +47,8 @@ export function defaultConfigFor(mode: SessionMode): SessionConfig {
   switch (mode) {
     case 'relaxed':
       return { ...DEFAULT_RELAXED };
+    case 'three-part':
+      return { ...DEFAULT_THREE_PART };
     case 'static-hold':
       return { ...DEFAULT_STATIC_HOLD };
     case 'rv-mobility':
@@ -88,6 +98,13 @@ export function clampConfig(config: SessionConfig): SessionConfig {
         emptyLungStretchSeconds: clamp(config.emptyLungStretchSeconds, 2, 10),
         recoverySeconds: clamp(config.recoverySeconds, 10, 120),
         rounds: clamp(config.rounds, 1, 5),
+      };
+    case 'three-part':
+      return {
+        ...config,
+        stageSeconds: clamp(config.stageSeconds, 1, 8),
+        exhaleSeconds: clamp(config.exhaleSeconds, 2, 20),
+        cycles: clamp(config.cycles, 1, 30),
       };
   }
 }

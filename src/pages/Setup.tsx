@@ -18,11 +18,17 @@ import type {
 import { useLanguage } from '../i18n/LanguageProvider';
 import { formatDuration } from '../utils/format';
 
-const VALID_MODES: SessionMode[] = ['relaxed', 'static-hold', 'rv-mobility'];
+const VALID_MODES: SessionMode[] = [
+  'relaxed',
+  'three-part',
+  'static-hold',
+  'rv-mobility',
+];
 
 /** Primary lesson to deep-link from each mode's setup screen. */
 const LEARN_FOR: Record<SessionMode, string> = {
   relaxed: 'comfortable-breath',
+  'three-part': 'belly-vs-chest',
   'static-hold': 'co2-tolerance',
   'rv-mobility': 'rv-explained',
 };
@@ -116,6 +122,34 @@ export function Setup() {
               value={config.cycles}
               min={1}
               max={60}
+              onChange={(v) => update({ cycles: v })}
+            />
+          </>
+        )}
+
+        {config.mode === 'three-part' && (
+          <>
+            <NumberField
+              label={t('setup.stageDuration')}
+              unit={sec}
+              value={config.stageSeconds}
+              min={1}
+              max={8}
+              onChange={(v) => update({ stageSeconds: v })}
+            />
+            <NumberField
+              label={t('setup.exhale')}
+              unit={sec}
+              value={config.exhaleSeconds}
+              min={2}
+              max={20}
+              onChange={(v) => update({ exhaleSeconds: v })}
+            />
+            <NumberField
+              label={t('setup.cycles')}
+              value={config.cycles}
+              min={1}
+              max={30}
               onChange={(v) => update({ cycles: v })}
             />
           </>

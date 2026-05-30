@@ -1,8 +1,15 @@
-export type SessionMode = 'relaxed' | 'static-hold' | 'rv-mobility';
+export type SessionMode =
+  | 'relaxed'
+  | 'three-part'
+  | 'static-hold'
+  | 'rv-mobility';
 
 export type SessionPhase =
   | 'preparation-inhale'
   | 'preparation-exhale'
+  | 'inhale-belly'
+  | 'inhale-ribs'
+  | 'inhale-chest'
   | 'final-inhale'
   | 'breath-hold'
   | 'empty-lung-stretch'
@@ -58,7 +65,16 @@ export interface RvMobilityConfig {
   rounds: number;
 }
 
+export interface ThreePartConfig {
+  mode: 'three-part';
+  /** Seconds for each of the belly / ribs / chest inhale stages. */
+  stageSeconds: number;
+  exhaleSeconds: number;
+  cycles: number;
+}
+
 export type SessionConfig =
   | RelaxedConfig
+  | ThreePartConfig
   | StaticHoldConfig
   | RvMobilityConfig;

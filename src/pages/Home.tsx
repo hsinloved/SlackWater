@@ -5,7 +5,12 @@ import { LogoMark } from '../components/LogoMark';
 import { useLanguage } from '../i18n/LanguageProvider';
 import type { SessionMode } from '../features/session/sessionTypes';
 
-const MODES: SessionMode[] = ['relaxed', 'static-hold', 'rv-mobility'];
+const MODES: SessionMode[] = [
+  'relaxed',
+  'three-part',
+  'static-hold',
+  'rv-mobility',
+];
 
 export function Home() {
   const navigate = useNavigate();
