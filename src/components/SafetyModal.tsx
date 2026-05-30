@@ -20,7 +20,7 @@ export function SafetyModal({ onAcknowledge }: SafetyModalProps) {
         <div className="mb-4 flex items-start justify-between gap-4">
           <h1
             id="safety-title"
-            className="text-2xl font-semibold text-ink"
+            className="font-heading text-3xl font-semibold text-ink"
           >
             {t('safety.title')}
           </h1>

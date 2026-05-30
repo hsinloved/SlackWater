@@ -56,7 +56,7 @@ export function Setup() {
       <Link to="/" className="mb-4 text-ink-soft hover:text-ink">
         ← {t('common.home')}
       </Link>
-      <h1 className="text-2xl font-semibold text-ink">
+      <h1 className="font-heading text-3xl font-semibold text-ink">
         {t(`modes.${config.mode}.title`)}
       </h1>
       <p className="mt-1 mb-5 text-sm text-ink-soft">

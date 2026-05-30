@@ -54,7 +54,7 @@ export function Complete() {
   return (
     <AppLayout>
       <header className="mb-5">
-        <h1 className="text-2xl font-semibold text-ink">
+        <h1 className="font-heading text-3xl font-semibold text-ink">
           {summary.finishedNaturally
             ? t('complete.titleComplete')
             : t('complete.titleEnded')}
@@ -69,7 +69,7 @@ export function Complete() {
 
       <section className="flex flex-col gap-5">
         <div>
-          <h2 className="mb-2 text-base font-medium text-ink">
+          <h2 className="mb-2 font-heading text-lg font-medium text-ink">
             {t('complete.feelingQ')}
           </h2>
           <div className="grid grid-cols-2 gap-2">
@@ -90,7 +90,7 @@ export function Complete() {
         </div>
 
         <div>
-          <h2 className="mb-2 text-base font-medium text-ink">
+          <h2 className="mb-2 font-heading text-lg font-medium text-ink">
             {t('complete.effortQ')}
           </h2>
           <div className="flex gap-2">

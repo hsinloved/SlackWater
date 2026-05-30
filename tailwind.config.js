@@ -22,6 +22,9 @@ export default {
           'Roboto',
           'sans-serif',
         ],
+        // Expressive serif headings: Latin via Cormorant Infant, CJK via
+        // Nanum Myeongjo (traditional-form Hanja suits Traditional Chinese).
+        heading: ['"Cormorant Infant"', '"Nanum Myeongjo"', 'Georgia', 'serif'],
       },
       keyframes: {
         'fade-in': {

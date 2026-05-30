@@ -10,7 +10,9 @@ export function PhaseCue({ label, cueText }: PhaseCueProps) {
       key={label}
       className="flex animate-fade-in flex-col items-center gap-3 text-center"
     >
-      <h2 className="text-2xl font-medium tracking-wide text-white">{label}</h2>
+      <h2 className="font-heading text-3xl font-medium tracking-wide text-white">
+        {label}
+      </h2>
       <p className="max-w-xs text-base leading-relaxed text-white/70">
         {cueText}
       </p>

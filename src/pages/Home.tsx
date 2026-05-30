@@ -19,7 +19,7 @@ export function Home() {
           <h1 className="mt-3 text-2xl font-light tracking-[0.3em] text-ink">
             SLACKWATER
           </h1>
-          <p className="mt-1 text-sm tracking-wide text-accent">
+          <p className="mt-1 font-heading text-base tracking-wide text-accent">
             {t('home.tagline')}
           </p>
         </div>

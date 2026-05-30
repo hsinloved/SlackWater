@@ -26,7 +26,7 @@ export function History() {
       <Link to="/" className="mb-4 text-ink-soft hover:text-ink">
         ← {t('common.home')}
       </Link>
-      <h1 className="mb-4 text-2xl font-semibold text-ink">
+      <h1 className="mb-4 font-heading text-3xl font-semibold text-ink">
         {t('history.title')}
       </h1>
 
