@@ -18,6 +18,8 @@ export interface Lesson {
   blocks: LessonBlock[];
   /** Optional one-tap practice this lesson recommends. */
   practice?: SessionConfig;
+  /** Optional interactive tool this lesson links to (route path). */
+  toolPath?: string;
 }
 
 // Gentle, ready-to-run templates a lesson can launch directly.
@@ -187,6 +189,7 @@ export const LESSONS: Lesson[] = [
   },
   {
     id: 'neutral-buoyancy',
+    toolPath: '/buoyancy',
     title: { en: 'Buoyancy & how much you inhale', 'zh-TW': '中性浮力與吸氣量' },
     summary: {
       en: 'Use one consistent, comfortable volume every dive.',

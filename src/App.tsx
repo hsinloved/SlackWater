@@ -9,6 +9,7 @@ import { Complete } from './pages/Complete';
 import { History } from './pages/History';
 import { Learn } from './pages/Learn';
 import { LearnLesson } from './pages/LearnLesson';
+import { Buoyancy } from './pages/Buoyancy';
 
 const SAFETY_ACK_KEY = 'celeste.safetyAcknowledged.v1';
 
@@ -33,6 +34,7 @@ export default function App() {
         <Route path="/history" element={<History />} />
         <Route path="/learn" element={<Learn />} />
         <Route path="/learn/:id" element={<LearnLesson />} />
+        <Route path="/buoyancy" element={<Buoyancy />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </>

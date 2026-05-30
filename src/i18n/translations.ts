@@ -142,6 +142,19 @@ const en: Record<string, string> = {
   'learn.disclaimer':
     'Educational only — not medical advice, and not a substitute for a certified freediving instructor.',
   'learn.startPractice': 'Start this practice →',
+  'learn.openTool': 'Try the self-test →',
+  'buoyancy.title': 'Buoyancy self-test',
+  'buoyancy.intro':
+    'With a coach, in the same gear, weight and water, try each inhale level and notice which feels most stable.',
+  'buoyancy.coach':
+    'Do this in the water only with a coach or buddy — never alone.',
+  'buoyancy.obs.floaty': 'Floaty',
+  'buoyancy.obs.stable': 'Stable',
+  'buoyancy.obs.sinks': 'Sinks',
+  'buoyancy.notesPlaceholder':
+    'What changed between levels? Truly floaty, or just tense?',
+  'buoyancy.save': 'Save',
+  'buoyancy.saved': 'Saved ✓',
   'setup.learnMore': 'Learn more →',
   'complete.bodyQuieterQ': 'Did your body get quieter?',
   'complete.relaxedAtUrgeQ': 'Relaxed at the first urge to breathe?',
@@ -292,6 +305,18 @@ const zhTW: Record<string, string> = {
   'learn.disclaimer':
     '僅供教育參考——不是醫療建議，也無法取代合格的自由潛水教練。',
   'learn.startPractice': '開始這個練習 →',
+  'learn.openTool': '試試自我測試 →',
+  'buoyancy.title': '中性浮力自我測試',
+  'buoyancy.intro':
+    '和教練一起，用同樣的裝備、配重與水域，試每一個吸氣量，看哪個最穩定。',
+  'buoyancy.coach': '只在水中、且有教練或潛伴時進行——切勿獨自練習。',
+  'buoyancy.obs.floaty': '偏浮',
+  'buoyancy.obs.stable': '穩定',
+  'buoyancy.obs.sinks': '偏沉',
+  'buoyancy.notesPlaceholder':
+    '不同吸氣量之間有什麼變化？是真的浮，還是只是緊張？',
+  'buoyancy.save': '儲存',
+  'buoyancy.saved': '已儲存 ✓',
   'setup.learnMore': '了解更多 →',
   'complete.bodyQuieterQ': '身體有變得更安靜嗎？',
   'complete.relaxedAtUrgeQ': '想呼吸時能保持放鬆嗎？',

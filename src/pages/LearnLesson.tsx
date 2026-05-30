@@ -74,6 +74,15 @@ export function LearnLesson() {
           {t('learn.startPractice')}
         </Button>
       )}
+      {lesson.toolPath && (
+        <Button
+          variant="secondary"
+          className="mt-2 w-full"
+          onClick={() => navigate(lesson.toolPath!)}
+        >
+          {t('learn.openTool')}
+        </Button>
+      )}
     </AppLayout>
   );
 }
