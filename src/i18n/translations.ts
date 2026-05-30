@@ -31,7 +31,7 @@ const en: Record<string, string> = {
   'modes.rv-mobility.title': 'RV Mobility / Empty-Lung Stretch',
   'modes.rv-mobility.subtitle': 'Dry-land only · gentle mobility',
   'modes.rv-mobility.desc':
-    'A short, gentle empty-lung stretch for chest and diaphragm mobility — not a breath-hold exercise.',
+    'Empty-lung (residual volume) stretches gently build the chest and diaphragm flexibility freedivers rely on at depth.',
 
   'setup.inhale': 'Inhale',
   'setup.exhale': 'Exhale',
@@ -153,7 +153,7 @@ const zhTW: Record<string, string> = {
   'modes.rv-mobility.title': '殘氣量活動度 / 空肺伸展',
   'modes.rv-mobility.subtitle': '僅限陸上 · 和緩活動度',
   'modes.rv-mobility.desc':
-    '短暫、和緩的空肺伸展，增加胸腔與橫膈的活動度——不是閉氣練習。',
+    '空肺（殘氣量）伸展，溫和培養自由潛水在深處所需的胸腔與橫膈柔軟度。',
 
   'setup.inhale': '吸氣',
   'setup.exhale': '吐氣',
