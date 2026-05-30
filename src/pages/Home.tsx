@@ -93,10 +93,10 @@ export function Home() {
       </Link>
 
       <div className="mt-auto flex flex-col items-center gap-4 pt-10">
-        <div className="glass flex w-full items-center justify-between gap-2 rounded-full p-1.5">
+        <div className="flex w-full items-center justify-between gap-3">
           <Link
             to="/history"
-            className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-ink transition active:scale-[0.98] hover:bg-white/[0.06]"
+            className="glass flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium text-ink transition active:scale-[0.98] hover:bg-white/[0.09]"
           >
             <svg
               width="17"
